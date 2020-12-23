@@ -7,7 +7,14 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
+*.pem
+*.cfg
 web-build/
 
 # macOS
 .DS_Store
+
+venv
+__pycache__
+
+
