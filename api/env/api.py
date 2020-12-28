@@ -15,7 +15,14 @@ def get_current_time():
 def post_search():
     req_data = request.get_json()
     location = req_data['location']
-    return {location: {"fakelong": 123, "fakelat":123}}
+    if (location == 'san diego'):
+        latitude = 32.806445
+        longitude = -117.135476
+    if (location == 'san francisco'):
+        latitude = 37.725170
+        longitude = -122.438336
+
+    return {"latitude": latitude, "longitude":longitude}
 
 if __name__ == '__main__':
     app.run(debug = True, port = 5000)
