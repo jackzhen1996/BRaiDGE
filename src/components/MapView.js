@@ -3,11 +3,13 @@ import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View } from 'react-
 import React, {useEffect, useState,} from 'react';
 
 const Map = function ({receivedData}) {
+    //Received data from Flaks api
     const dataArray = 
     receivedData === null? [{'latitude':37.725170,'longitude':-122.438336}] : [{'latitude':receivedData.latitude,'longitude': receivedData.longitude}]
     let mapRef = null;
 
     useEffect(()=>{
+        //check data array change, if so navigate to the location
         mapRef.fitToCoordinates(
             dataArray
             ,
@@ -16,7 +18,7 @@ const Map = function ({receivedData}) {
             }
         )
     })
-    
+
     return (
     <MapView
           ref = {(ref) => {mapRef = ref}}

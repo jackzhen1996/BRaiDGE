@@ -3,6 +3,7 @@ import React, {useEffect, useState,} from 'react';
 
 const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
 
+    //POST api route test method
     var post_route = "http:192.168.86.61:5000/search";
     const post_search = function(url,search) {
         const requestOptions = {
@@ -27,6 +28,7 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
 
     //}
 
+    //Run each item in the data array thru regex test, and display only those who passed
     const renderData = function({item}) {
         const regex = new RegExp(`^${searchValue}`,'i');
         if (regex.test(item.location)){
@@ -50,7 +52,6 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
             keyExtractor = {item => item.location}
             renderItem = {renderData} 
             data = {data} />
-            {/*<Text>selection page</Text>*/}
         </View>
 
     )
