@@ -28,9 +28,18 @@ export default function App() {
 
   const [selectionView, switchView] = useState(false);
 
-  //Mid-point variable
+  //Mid-point variables
+  //Pass setValue into Dropdown to catch value entered, 
+  //pass searchValue into SelectionPage to run regex test and display results
   const [searchValue,setValue] = useState(null);
+  //coordinates in this test is the county name
   const [coordinates, fetchCoordinates] = useState(null);
+
+  const rawCountyData = require('./data/lat_long_allcounties.json');
+  const filteredData = rawCountyData.filter(data=>data['county_names'] === coordinates)
+  const filteredJSON = filteredData.map((json)=>{
+    return {'latitude' : json.latitude, 'longitude': json.longitude}
+  })
 
 
   return (
@@ -38,7 +47,7 @@ export default function App() {
       {selectionView?
         <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue} data = {data}/> 
         :
-        <MapView receivedData = {coordinates}/>
+        <MapView receivedData = {filteredJSON}/>
       }
       <DropDown searchingFor = {setValue} data = {data} checkOnPress = {switchView} isFocused = {selectionView}/> 
       </View>
