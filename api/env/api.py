@@ -1,9 +1,9 @@
-import time
-from flask import Flask,request
+import pickle 
+from flask import Flask,request, jsonify
 from flask_cors import CORS
+from model.model import getRowsBasedOnCounty
 
 app = Flask(__name__)
-CORS(app)
 
 #test route: returns a dummy object
 @app.route('/time')
@@ -24,7 +24,25 @@ def post_search():
 
     return {"latitude": latitude, "longitude":longitude}
 
+    
+@app.route('/testData', methods = ['POST'])
+def getRow():
+    #get requst body
+    req_data = request.get_json()
+    county = req_data['location']
+
+    #open up bin file that contains the model
+    with open('./model/model.bin', 'rb') as f_in:
+        model = pickle.load(f_in)
+        f_in.close()
+
+    #pass arguments into function to get output
+    result = getRowsBasedOnCounty(county,model)
+
+    #return output
+    return result
+
 if __name__ == '__main__':
-    app.run(debug = True, port = 5000)
+    app.run(debug = True, host= '0.0.0.0', port = 5000)
 
 
