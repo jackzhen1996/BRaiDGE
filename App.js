@@ -47,7 +47,7 @@ export default function App() {
       {selectionView?
         <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue} data = {data}/> 
         :
-        <MapView receivedData = {filteredJSON}/>
+        <MapView receivedData = {filteredData}/>
       }
       <DropDown searchingFor = {setValue} data = {data} checkOnPress = {switchView} isFocused = {selectionView}/> 
       </View>

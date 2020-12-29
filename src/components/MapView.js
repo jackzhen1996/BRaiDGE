@@ -1,5 +1,5 @@
-import MapView, {Marker} from 'react-native-maps';
-import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View } from 'react-native';
+import MapView, {Marker, Callout} from 'react-native-maps';
+import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, {useEffect, useState,} from 'react';
 
 const Map = function ({receivedData}) {
@@ -49,13 +49,31 @@ const Map = function ({receivedData}) {
         //  )}
         
         >
-        {dataArray.map((point,index)=>(
-          <Marker 
-            coordinate = {{latitude:point.latitude, longitude:point.longitude}}
-            title = {'' + index}
-            key = {index}
-          />
-        ))}
+        {dataArray.map((point,index)=>{
+            //Create tooltip description
+            const title = "Bridge" + index;
+            const code = "County Code: " + point['County Code'];
+            const name = "County Name: " + point['county_names'];
+            const type = "Structural Type: " + point['StrType'];
+            const material = "Structural Material: " + point['Str Material'];
+            const design = "Structural Design: " + point['Str Design'];
+            const text = name + "\n" + code+ "\n" + type + "\n" + material + "\n"+ design;
+            return (
+            <Marker 
+                coordinate = {{latitude:point.latitude, longitude:point.longitude}}
+                key = {index}
+            >
+                <Callout>
+                    <Text style = {{fontSize:16, fontWeight: 'bold'}}>{title}</Text>
+                    <Text>{text}{'\n'}</Text>
+                    {/*Link to detailed page*/}
+                    <TouchableOpacity>
+                        <Text style = {{color:'blue'}}>See more details</Text>
+                    </TouchableOpacity>
+                </Callout>
+            </Marker>
+                )
+        })}
         </MapView>
     )
 }
