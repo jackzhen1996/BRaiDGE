@@ -1,8 +1,10 @@
 import MapView, {Marker, Callout} from 'react-native-maps';
 import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React, {useEffect, useState,} from 'react';
+import DetailView from './detailedView.js';
 
 const Map = function ({receivedData}) {
+    const [detailed,goToDetailed] = useState(false);
     const dataArray = receivedData.length !== 0? receivedData: [{'latitude':37.8197222,'longitude':-122.478888}]
     console.log(receivedData)
     //Received data from Flaks api
@@ -53,11 +55,10 @@ const Map = function ({receivedData}) {
             //Create tooltip description
             const title = "Bridge" + index;
             const code = "County Code: " + point['County Code'];
-            const name = "County Name: " + point['county_names'];
-            const type = "Structural Type: " + point['StrType'];
+            const name = point['county_names'];
             const material = "Structural Material: " + point['Str Material'];
             const design = "Structural Design: " + point['Str Design'];
-            const text = name + "\n" + code+ "\n" + type + "\n" + material + "\n"+ design;
+            const text = name + "\n" + code   + "\n" + material + "\n"+ design;
             return (
             <Marker 
                 coordinate = {{latitude:point.latitude, longitude:point.longitude}}
@@ -67,13 +68,14 @@ const Map = function ({receivedData}) {
                     <Text style = {{fontSize:16, fontWeight: 'bold'}}>{title}</Text>
                     <Text>{text}{'\n'}</Text>
                     {/*Link to detailed page*/}
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress = {()=>goToDetailed(true)}>
                         <Text style = {{color:'blue'}}>See more details</Text>
                     </TouchableOpacity>
                 </Callout>
             </Marker>
                 )
         })}
+        <DetailView setModal = {goToDetailed} showModal = {detailed} />
         </MapView>
     )
 }
