@@ -28,7 +28,7 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
                     post_search(post_route,item['CountyName']);
                     checkOnPress(false);
                     }}>
-                    <Text style = {{width:300,fontSize: 25,borderWidth:1, marginTop:10}}>
+                    <Text style = {{width:300,fontSize: 25,borderWidth:1, marginTop:'4j%'}}>
                         {item['CountyName']}
                     </Text>
                 </TouchableOpacity>
@@ -46,12 +46,14 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
         return (
             <View style = {styles.container}>
                 {/*Display data here*/}
+                <View style = {styles.list}>
                 {searchValue?
                     <FlatList 
-                        keyExtractor = {item => item['CountyName']}
+                    keyExtractor = {item => item['CountyName']}
                     renderItem = {renderData} 
                 data = {filteredData(searchValue)} />
                 :null}
+                </View>
             </View>
     
         )
@@ -62,13 +64,17 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
 
 const styles = StyleSheet.create({
     container: {
+        position:'absolute',
+        zIndex: 1,
+        height: '100%',
         width:'100%',
-        height: '80%',
         borderWidth:1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
       },
+      list : {
+          marginTop: '20%'
+      }
 
   });
 

@@ -3,10 +3,14 @@ import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpac
 import React, {useEffect, useState, useMemo} from 'react';
 import DetailView from './detailedView.js';
 import Marker from './Marker.js';
+import SelectionPage from './selectionPage.js';
 
 
-const Map = function ({receivedData}) {
+const Map = function ({receivedData, passToSelectionPage}) {
+    const {checkOnPress,searchValue,fetchData,selectionView} = passToSelectionPage;
+    console.log(searchValue)
     const [detailed,goToDetailed] = useState(false);
+    console.log(selectionView)
     const dataArray = receivedData? receivedData: [{'latitude':37.8197222,'longitude':-122.478888}];
     //Received data from Flaks api
     //const dataArray = 
@@ -23,12 +27,10 @@ const Map = function ({receivedData}) {
             const design = "Structural Design: " + point['Str Design'];
             const text = name + "\n" + code   + "\n" + material + "\n"+ design;
             return (
-                <Marker goToDetailed = {goToDetailed} point = {point} key = {index}/>
+                <Marker title = {title} text = {text} goToDetailed = {goToDetailed} point = {point} key = {index}/>
             )
         })
     }
-
-    const memoData = useMemo(()=>mapData(dataArray), [dataArray]);
 
     useEffect(()=>{
         //check data array change, if so navigate to the location
@@ -38,14 +40,17 @@ const Map = function ({receivedData}) {
         ,
             {
               edgePadding: {top: 200, right:50, bottom:200,left:50},
-              animated: false
+              animated: true
             }
         )
-        console.log('moving to new location')
     },[dataArray])
 
     return (
-    <MapView
+      <View>
+        {selectionView &&
+          <SelectionPage checkOnPress = {checkOnPress} fetchData = {fetchData} searchValue = {searchValue}/>
+        }
+      <MapView
           ref = {(ref) => {mapRef = ref}}
           loadingEnabled = {true}
           style = {styles.map}
@@ -73,9 +78,10 @@ const Map = function ({receivedData}) {
         //  )}
         >
         {/*<Marker point = {{'latitude':37.725170,'longitude':-122.438336}}/>*/}
-        {memoData}
+        {mapData(dataArray)}
         <DetailView setModal = {goToDetailed} showModal = {detailed} />
         </MapView>
+        </View>
     )
 }
 

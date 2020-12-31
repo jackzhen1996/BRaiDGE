@@ -31,17 +31,21 @@ export default function App() {
   //const filteredData = rawCountyData.filter(data=>data['county_names'] === coordinates)
  console.log(coordinates? 'coordinates refreshed': 'no new coordinates')
 
+ const passToSelectionPage = {
+  'checkOnPress': switchView,
+  'fetchData': fetchCoordinates,
+  'searchValue': searchValue,
+  'selectionView': selectionView
+ };
+
 
   return (
     <View style = {styles.container}>
-      {selectionView?
-        <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue}/> 
-        :
-        <MapView receivedData = {coordinates}/>
-      }
+      <MapView receivedData = {coordinates} passToSelectionPage = {passToSelectionPage}/>
       <TouchableWithoutFeedback onPress = {()=>Keyboard.dismiss()}>
         <DropDown searchingFor = {setValue} checkOnPress = {switchView} isFocused = {selectionView}/> 
       </TouchableWithoutFeedback>
+      {/*{selectionView && <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue}/>  }*/}
       </View>
   )
   }
