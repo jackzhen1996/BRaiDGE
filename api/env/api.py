@@ -25,6 +25,7 @@ def post_search():
     return {"latitude": latitude, "longitude":longitude}
 
     
+#Returns row based on "county_names" column
 @app.route('/testData', methods = ['POST'])
 def getRow():
     #get requst body

@@ -5,7 +5,7 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
     const countyNames = require('../../data/geocodes.json');
 
     //POST api route test method
-    var post_route = "http:192.168.86.61:5000/search";
+    var post_route = "http://192.168.86.61:5000/testData";
     const post_search = function(url,search) {
         const requestOptions = {
           method: 'POST',
@@ -20,56 +20,45 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
             });
       }
 
-    //  const onTextChange = function(value) {
-    //    let suggestion = [];
-    //    if (value.length > 0) {
-    //        const regex = new RegExp(`^${value}`,'i');
-    //        setSuggestion(dataArray.sort().filter(v=>v.test(regex)));
-    //    }
-
-    //}
-
     //Run each item in the data array thru regex test, and display only those who passed
     const renderData = function({item}) {
-        //const regex = new RegExp(`^${searchValue}`,'i');
-        //if (regex.test(item.location)){
-        //    return(
-        //        <TouchableOpacity 
-        //            onPress = {()=>{
-        //            post_search(post_route,item.location);
-        //            checkOnPress(false);
-        //            }}>
-        //            <Text style = {{width:300,fontSize: 25,borderWidth:1, marginTop:10}}>
-        //                {item.location}
-        //            </Text>
-        //        </TouchableOpacity>
-        //    )
-        //}
-        return(
-            <TouchableOpacity 
-                onPress = {()=>{
-                //post_search(post_route,item.location);
-                fetchData(item.CountyName)
-                checkOnPress(false);
-                }}>
-                <Text style = {{width:300,fontSize: 25,borderWidth:1, marginTop:10}}>
-                    {item.CountyName}
-                </Text>
-            </TouchableOpacity>
+            return(
+                <TouchableOpacity 
+                    onPress = {()=>{
+                    post_search(post_route,item['CountyName']);
+                    checkOnPress(false);
+                    }}>
+                    <Text style = {{width:300,fontSize: 25,borderWidth:1, marginTop:10}}>
+                        {item['CountyName']}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }
+    
+    const filteredData = function(value) {
+        if (!searchValue) {
+            return [];
+        } 
+        const regex = new RegExp(`^${value}`,'i');
+        return countyNames.filter(item=>regex.test(item['CountyName']));
+    }
+
+        return (
+            <View style = {styles.container}>
+                {/*Display data here*/}
+                {searchValue?
+                    <FlatList 
+                        keyExtractor = {item => item['CountyName']}
+                    renderItem = {renderData} 
+                data = {filteredData(searchValue)} />
+                :null}
+            </View>
+    
         )
 
-    }
-    return (
-        <View style = {styles.container}>
-            {/*Display data here*/}
-            <FlatList 
-            keyExtractor = {item => item.location}
-            renderItem = {renderData} 
-            data = {countyNames} />
-        </View>
 
-    )
-};
+    };
+
 
 const styles = StyleSheet.create({
     container: {

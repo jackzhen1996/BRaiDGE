@@ -1,4 +1,4 @@
-import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View } from 'react-native';
+import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View,TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, {useEffect, useState,} from 'react';
 
 const DropDown = function({checkOnPress,isFocused,searchingFor}) {
@@ -6,7 +6,16 @@ const DropDown = function({checkOnPress,isFocused,searchingFor}) {
         
     return (
         <View style = {{position:'absolute',top:50, display: 'flex', flexDirection: 'row', justifyContent:'space-evenly'}}>
-            {isFocused? <Button title = 'Go back' onPress = {()=>checkOnPress(false)}/> : null}
+            {isFocused?
+             <Button title = 'Go back' onPress = {
+                 ()=>{
+                     checkOnPress(false);
+                     Keyboard.dismiss();
+                    }
+
+                }/> 
+             : null
+             }
             <TextInput 
             clearButtonMode = 'always' 
             style = {{fontSize: 22,height:40,borderWidth:1,backgroundColor:'white',width:'90%'}}
