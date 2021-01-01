@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {TouchWithoutFeedback,Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import MapView from './src/components/MapView.js';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './src/components/home.js';
+import SavedBridges from './src/components/savedBridges.js';
 import DropDown from './src/components/dropDownSearch.js';
-import SelectionPage from './src/components/selectionPage.js';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() { 
   //var data = require('./data/new_data_latlong_JSON.json');
@@ -18,35 +22,34 @@ export default function App() {
   //  console.log(search)
   //}, []);
 
-  const [selectionView, switchView] = useState(false);
+  //const [selectionView, switchView] = useState(false);
 
   //Mid-point variables
   //Pass setValue into Dropdown to catch value entered, 
   //pass searchValue into SelectionPage to run regex test and display results
-  const [searchValue,setValue] = useState(null);
+  //const [searchValue,setValue] = useState(null);
   //coordinates in this test is the county name
-  const [coordinates, fetchCoordinates] = useState(null);
+  //const [coordinates, fetchCoordinates] = useState(null);
 
   //const rawCountyData = require('./data/lat_long_allcounties.json');
   //const filteredData = rawCountyData.filter(data=>data['county_names'] === coordinates)
- console.log(coordinates? 'coordinates refreshed': 'no new coordinates')
 
- const passToSelectionPage = {
-  'checkOnPress': switchView,
-  'fetchData': fetchCoordinates,
-  'searchValue': searchValue,
-  'selectionView': selectionView
- };
+// const passToSelectionPage = {
+//  'checkOnPress': switchView,
+//  'fetchData': fetchCoordinates,
+//  'searchValue': searchValue,
+//  'selectionView': selectionView
+// };
 
 
   return (
-    <View style = {styles.container}>
-      <MapView receivedData = {coordinates} passToSelectionPage = {passToSelectionPage}/>
-      <TouchableWithoutFeedback onPress = {()=>Keyboard.dismiss()}>
-        <DropDown searchingFor = {setValue} checkOnPress = {switchView} isFocused = {selectionView}/> 
-      </TouchableWithoutFeedback>
-      {/*{selectionView && <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue}/>  }*/}
-      </View>
+    <NavigationContainer>
+    <Drawer.Navigator>
+      <Drawer.Screen name = 'Home'  component = {Home}/>
+      <Drawer.Screen name = "Saved" component = {SavedBridges} />
+    </Drawer.Navigator>
+  </NavigationContainer>
+
   )
   }
 
