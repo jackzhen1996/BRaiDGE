@@ -1,12 +1,32 @@
 import React, {useEffect, useState,} from 'react';
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image} from 'react-native';
 
-const previewContainer = function({identifier, goToDetailed}) {
-    const id = identifier? identifier.id : 0;
+
+const previewContainer = function({identifier, goToDetailed,fetchData}) {
+
+ var post_route = "http://192.168.86.61:5000/testID";
+const post_search = function(url,identifier) {
+    const requestOptions = {
+      method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({'latitude': identifier})
+    }
+    fetch(url, requestOptions)
+    //response is in json string or Python object string
+        .then(response => response.json())
+        .then(data => {
+            fetchData(data);
+        });
+  }
+    const id = identifier? identifier.coordinate.latitude : 0;
     return (
-    
     //On press with lead to the detailed page
-    <TouchableOpacity onPress = {()=>goToDetailed(true)} style = {styles.previewContainer}>
+    <TouchableOpacity onPress = {()=>{
+        goToDetailed(true)
+        post_search(post_route,id)
+        
+        }} 
+        style = {styles.previewContainer}>
             <View style = {styles.image}>
                 {/*icon goes here*/}
                 {/*<Image></Image>*/}

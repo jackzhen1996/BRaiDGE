@@ -20,6 +20,9 @@ const Map = function ({receivedData, passToSelectionPage}) {
     //Callback object from pressing on a marker
     const [markerObject, getMarkerObject] = useState(null);
 
+    //fetch data from preview triggered api call to get full-page view
+    const [fullPageData, fetchFullPage] = useState(null);
+
     //Received data from Flaks api
     //const dataArray = 
     //receivedData === null? [{'latitude':37.725170,'longitude':-122.438336}] : [{'latitude':receivedData.latitude,'longitude': receivedData.longitude}]
@@ -59,7 +62,7 @@ const Map = function ({receivedData, passToSelectionPage}) {
         )
     },[dataArray])
 
-    console.log(markerObject)
+    console.log(fullPageData)
 
 
     return (
@@ -99,13 +102,13 @@ const Map = function ({receivedData, passToSelectionPage}) {
           >
           {/*<Marker point = {{'latitude':37.725170,'longitude':-122.438336}}/>*/}
           {memoData}
-          <DetailView setModal = {goToDetailed} showModal = {detailed} />
+          <DetailView data = {fullPageData} setModal = {goToDetailed} showModal = {detailed} />
           </MapView>
         </TouchableWithoutFeedback>
 
         {/*Map re-rendering causes the text bugs, place the rendering of the preview outside of the map*/}
         {markerObject &&
-          <Preview goToDetailed = {goToDetailed} identifier = {markerObject} />
+          <Preview fetchData = {fetchFullPage} goToDetailed = {goToDetailed} identifier = {markerObject} />
         } 
         </View>
     )
