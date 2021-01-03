@@ -4,12 +4,14 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './src/components/home.js';
 import SavedBridges from './src/components/savedBridges.js';
-import DropDown from './src/components/dropDownSearch.js';
+import Splash from './src/components/splash.js';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() { 
   //var data = require('./data/new_data_latlong_JSON.json');
+
+  
 
   //Test routes
 
@@ -41,15 +43,14 @@ export default function App() {
 //  'selectionView': selectionView
 // };
 
-
   return (
     <NavigationContainer>
-    <Drawer.Navigator>
+    <Drawer.Navigator initialRouteName = 'Splash'>
+      <Drawer.Screen name = 'Splash' component = {Splash}/>
       <Drawer.Screen name = 'Home'  component = {Home}/>
       <Drawer.Screen name = "Saved" component = {SavedBridges} />
     </Drawer.Navigator>
   </NavigationContainer>
-
   )
   }
 
