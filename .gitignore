@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 *.pem
 *.cfg
+.flaskenv
 web-build/
 
 # macOS

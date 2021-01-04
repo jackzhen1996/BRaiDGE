@@ -1,0 +1,234 @@
+[
+ {
+   "CountyCode": 1,
+   "CountyName": "Alameda County"
+ },
+ {
+   "CountyCode": 3,
+   "CountyName": "Alpine County"
+ },
+ {
+   "CountyCode": 5,
+   "CountyName": "Amador County"
+ },
+ {
+   "CountyCode": 7,
+   "CountyName": "Butte County"
+ },
+ {
+   "CountyCode": 9,
+   "CountyName": "Calaveras County"
+ },
+ {
+   "CountyCode": 11,
+   "CountyName": "Colusa County"
+ },
+ {
+   "CountyCode": 13,
+   "CountyName": "Contra Costa County"
+ },
+ {
+   "CountyCode": 15,
+   "CountyName": "Del Norte County"
+ },
+ {
+   "CountyCode": 17,
+   "CountyName": "El Dorado County"
+ },
+ {
+   "CountyCode": 19,
+   "CountyName": "Fresno County"
+ },
+ {
+   "CountyCode": 21,
+   "CountyName": "Glenn County"
+ },
+ {
+   "CountyCode": 23,
+   "CountyName": "Humboldt County"
+ },
+ {
+   "CountyCode": 25,
+   "CountyName": "Imperial County"
+ },
+ {
+   "CountyCode": 27,
+   "CountyName": "Inyo County"
+ },
+ {
+   "CountyCode": 29,
+   "CountyName": "Kern County"
+ },
+ {
+   "CountyCode": 31,
+   "CountyName": "Kings County"
+ },
+ {
+   "CountyCode": 33,
+   "CountyName": "Lake County"
+ },
+ {
+   "CountyCode": 35,
+   "CountyName": "Lassen County"
+ },
+ {
+   "CountyCode": 37,
+   "CountyName": "Los Angeles County"
+ },
+ {
+   "CountyCode": 39,
+   "CountyName": "Madera County"
+ },
+ {
+   "CountyCode": 41,
+   "CountyName": "Marin County"
+ },
+ {
+   "CountyCode": 43,
+   "CountyName": "Mariposa County"
+ },
+ {
+   "CountyCode": 45,
+   "CountyName": "Mendocino County"
+ },
+ {
+   "CountyCode": 47,
+   "CountyName": "Merced County"
+ },
+ {
+   "CountyCode": 49,
+   "CountyName": "Modoc County"
+ },
+ {
+   "CountyCode": 51,
+   "CountyName": "Mono County"
+ },
+ {
+   "CountyCode": 53,
+   "CountyName": "Monterey County"
+ },
+ {
+   "CountyCode": 55,
+   "CountyName": "Napa County"
+ },
+ {
+   "CountyCode": 57,
+   "CountyName": "Nevada County"
+ },
+ {
+   "CountyCode": 59,
+   "CountyName": "Orange County"
+ },
+ {
+   "CountyCode": 61,
+   "CountyName": "Placer County"
+ },
+ {
+   "CountyCode": 63,
+   "CountyName": "Plumas County"
+ },
+ {
+   "CountyCode": 65,
+   "CountyName": "Riverside County"
+ },
+ {
+   "CountyCode": 67,
+   "CountyName": "Sacramento County"
+ },
+ {
+   "CountyCode": 69,
+   "CountyName": "San Benito County"
+ },
+ {
+   "CountyCode": 71,
+   "CountyName": "San Bernardino County"
+ },
+ {
+   "CountyCode": 73,
+   "CountyName": "San Diego County"
+ },
+ {
+   "CountyCode": 75,
+   "CountyName": "San Francisco County"
+ },
+ {
+   "CountyCode": 77,
+   "CountyName": "San Joaquin County"
+ },
+ {
+   "CountyCode": 79,
+   "CountyName": "San Luis Obispo County"
+ },
+ {
+   "CountyCode": 81,
+   "CountyName": "San Mateo County"
+ },
+ {
+   "CountyCode": 83,
+   "CountyName": "Santa Barbara County"
+ },
+ {
+   "CountyCode": 85,
+   "CountyName": "Santa Clara County"
+ },
+ {
+   "CountyCode": 87,
+   "CountyName": "Santa Cruz County"
+ },
+ {
+   "CountyCode": 89,
+   "CountyName": "Shasta County"
+ },
+ {
+   "CountyCode": 91,
+   "CountyName": "Sierra County"
+ },
+ {
+   "CountyCode": 93,
+   "CountyName": "Siskiyou County"
+ },
+ {
+   "CountyCode": 95,
+   "CountyName": "Solano County"
+ },
+ {
+   "CountyCode": 97,
+   "CountyName": "Sonoma County"
+ },
+ {
+   "CountyCode": 99,
+   "CountyName": "Stanislaus County"
+ },
+ {
+   "CountyCode": 101,
+   "CountyName": "Sutter County"
+ },
+ {
+   "CountyCode": 103,
+   "CountyName": "Tehama County"
+ },
+ {
+   "CountyCode": 105,
+   "CountyName": "Trinity County"
+ },
+ {
+   "CountyCode": 107,
+   "CountyName": "Tulare County"
+ },
+ {
+   "CountyCode": 109,
+   "CountyName": "Tuolumne County"
+ },
+ {
+   "CountyCode": 111,
+   "CountyName": "Ventura County"
+ },
+ {
+   "CountyCode": 113,
+   "CountyName": "Yolo County"
+ },
+ {
+   "CountyCode": 115,
+   "CountyName": "Yuba County"
+ }
+]

@@ -1,21 +1,19 @@
-import React, {useEffect, useState,} from 'react';
-import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View } from 'react-native';
-import MapView from './src/components/MapView.js';
-import DropDown from './src/components/dropDownSearch.js';
-import SelectionPage from './src/components/selectionPage.js';
+import React, {useEffect, useState} from 'react';
+import {TouchWithoutFeedback,Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './src/components/home.js';
+import SavedBridges from './src/components/savedBridges.js';
+import Splash from './src/components/splash.js';
 
-export default function App() {
-  const [showMap,setMap] = useState(false);
-  const [longDelta,setLongDelta] = useState(0);
-  const [latDelta,setLatDelta] = useState(0);
-  const [search,setSearch] = useState(null);
- 
+const Drawer = createDrawerNavigator();
+
+export default function App() { 
   //var data = require('./data/new_data_latlong_JSON.json');
-  var data = require('./data/autoComplete_test.json')
+
+  
 
   //Test routes
-  var post_route = "http:192.168.86.61:5000/search";
-  var get_route = "http:192.168.86.61:5000/time"
 
   //useEffect(() => {
     //On PC, replace IP with address with IPv4
@@ -26,22 +24,33 @@ export default function App() {
   //  console.log(search)
   //}, []);
 
-  const [selectionView, switchView] = useState(false);
+  //const [selectionView, switchView] = useState(false);
 
-  //Mid-point variable
-  const [searchValue,setValue] = useState(null);
-  const [coordinates, fetchCoordinates] = useState(null);
+  //Mid-point variables
+  //Pass setValue into Dropdown to catch value entered, 
+  //pass searchValue into SelectionPage to run regex test and display results
+  //const [searchValue,setValue] = useState(null);
+  //coordinates in this test is the county name
+  //const [coordinates, fetchCoordinates] = useState(null);
 
+  //const rawCountyData = require('./data/lat_long_allcounties.json');
+  //const filteredData = rawCountyData.filter(data=>data['county_names'] === coordinates)
+
+// const passToSelectionPage = {
+//  'checkOnPress': switchView,
+//  'fetchData': fetchCoordinates,
+//  'searchValue': searchValue,
+//  'selectionView': selectionView
+// };
 
   return (
-    <View style = {styles.container}>
-      {selectionView?
-        <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue} data = {data}/> 
-        :
-        <MapView receivedData = {coordinates}/>
-      }
-      <DropDown searchingFor = {setValue} data = {data} checkOnPress = {switchView} isFocused = {selectionView}/> 
-      </View>
+    <NavigationContainer>
+    <Drawer.Navigator initialRouteName = 'Splash'>
+      <Drawer.Screen name = 'Splash' component = {Splash}/>
+      <Drawer.Screen name = 'Home'  component = {Home}/>
+      <Drawer.Screen name = "Saved" component = {SavedBridges} />
+    </Drawer.Navigator>
+  </NavigationContainer>
   )
   }
 
