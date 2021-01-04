@@ -1,5 +1,6 @@
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase } from 'react-native';
 import React, {useEffect, useState,} from 'react';
+import MapPin from '../../assets/map-pin.tsx'
 
 const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
     const countyNames = require('../../data/geocodes.json');
@@ -27,8 +28,12 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
                     onPress = {()=>{
                     post_search(post_route,item['CountyName']);
                     checkOnPress(false);
-                    }}>
-                    <Text style = {{width:300,fontSize: 25,borderWidth:1, marginTop:'4j%'}}>
+                    }}
+                    style = {{flex:1,flexDirection:'row', borderBottomColor:'#E9E8E8',borderBottomWidth:1, height:45, justifyContent:'space-around'}}
+                    >
+
+                    <View style = {{flex:1,justifyContent:'center',alignItems:'center'}}><MapPin/></View>
+                    <Text style = {{width:'85%',fontSize: 18, padding:'2.5%', textAlign:'left', }}>
                         {item['CountyName']}
                     </Text>
                 </TouchableOpacity>
@@ -68,12 +73,14 @@ const styles = StyleSheet.create({
         zIndex: 1,
         height: '100%',
         width:'100%',
-        borderWidth:1,
+        //borderWidth:1,
         backgroundColor: '#fff',
         alignItems: 'center',
       },
       list : {
-          marginTop: '20%'
+          marginTop: '24%',
+          width:'93%',
+        //  borderWidth: 1
       }
 
   });

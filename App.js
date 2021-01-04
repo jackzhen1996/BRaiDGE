@@ -46,7 +46,7 @@ export default function App() {
   return (
     <NavigationContainer>
     <Drawer.Navigator initialRouteName = 'Splash'>
-      <Drawer.Screen name = 'Splash' component = {Splash}/>
+      <Drawer.Screen options = {{drawerLabel: ()=>null, drawerIcon:()=>null}} name = 'Splash' component = {Splash}/>
       <Drawer.Screen name = 'Home'  component = {Home}/>
       <Drawer.Screen name = "Saved" component = {SavedBridges} />
     </Drawer.Navigator>
