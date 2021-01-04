@@ -6,9 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 const Splash = function() {
     const navigation = useNavigation();
 
-    useEffect(()=>{
-        setTimeout(()=>navigation.navigate('Home'),2000);
-    },[])
+    //useEffect(()=>{
+    //    setTimeout(()=>navigation.navigate('Home'),2000);
+    //},[])
     
     return (
         <View style = {styles.container}>

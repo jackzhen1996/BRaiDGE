@@ -5,20 +5,6 @@ import DropDown from './/dropDownSearch.js';
 
 
 const home = function() {  
-    
-    //var data = require('./data/new_data_latlong_JSON.json');
-
-    //Test routes
-
-    //useEffect(() => {
-    //On PC, replace IP with address with IPv4
-    //Format :'IP'/'MY_API'
-    //  fetch('http:192.168.86.61:5000/time').then(res => res.json()).then(data => {
-    //    setSearch(data.time)
-    //  });
-    //  console.log(search)
-    //}, []);
-
     const [selectionView, switchView] = useState(false);
 
     //Mid-point variables
