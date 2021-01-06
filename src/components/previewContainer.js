@@ -34,10 +34,10 @@ const previewContainer = function({identifier, goToDetailed,fetchData}) {
                 {/*icon goes here*/}
                 {/*<Image></Image>*/}
                 <View style = {{height: '75%', borderTopLeftRadius:10}}>
-                  <Image source = {require('../../assets/bridge_placeholder.png')}/>
+                  <Image style = {{width:150, height: 120, borderTopLeftRadius:13, borderBottomLeftRadius:13}} source = {require('../../assets/bridge_placeholder.png')}/>
                 </View>
                 <View style = {{height: '25%',backgroundColor: 'white',borderBottomLeftRadius:13}}>
-                  <Text style = {{fontSize: 20, textAlign:'center', fontWeight:'bold',paddingRight: '10%', paddingTop: '2%'}}>#{structID}</Text>
+                  <Text style = {{fontSize: 20, textAlign:'center', fontWeight:'bold',paddingRight: '10%', paddingTop: '2%',}}>#{structID}</Text>
                 </View>
             </View>
             <View style = {styles.text}>
@@ -73,13 +73,16 @@ const styles = StyleSheet.create({
       left: {
         position: 'relative',
         width: '40%',
-        borderBottomLeftRadius: 13
+        borderBottomLeftRadius: 13,
         //borderWidth: 1,
       },
       text: {
+        backgroundColor: '#F8F8F8',
         flex:1,
         position: 'relative',
         padding: '3%',
+        borderTopRightRadius: 13,
+        borderBottomRightRadius: 13
       },
       header: {
         fontWeight:'bold',
