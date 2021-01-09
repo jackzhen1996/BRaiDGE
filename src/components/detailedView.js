@@ -1,8 +1,10 @@
 import React, {useEffect, useState,} from 'react';
-import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image } from 'react-native';
+import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground } from 'react-native';
 import Modal from 'react-native-modal';
 import ArrowDown from '../../assets/arrowDown.tsx';
 import ArrowUp from '../../assets/arrowUp.tsx';
+import BackButton from '../../assets/backButton.tsx';
+import Svg from '../../assets/cc.tsx';
 
 const detailedView = function({setModal,showModal,data}) {
     //Use useeffect to fetch required data in this view
@@ -141,6 +143,49 @@ const detailedView = function({setModal,showModal,data}) {
         ]
     }
 
+    const materialMap = {
+        '0 - Other': {
+            'color': 'black',
+            'name' : 'O'
+        },
+        '1 - Concrete': {
+            'color': '#FF8E14',
+            'name' : 'C'
+        },
+        '2 - Concrete Continuous': {
+            'color' : '#FF8E14',
+            'name': 'CC'
+        },
+        '3 - Steel' : {
+            'color': '#65C8FF',
+            'name': 'S'
+        },
+        '4 - Steel Continuous': {
+            'color': '#65C8FF',
+            'name': 'SC'
+        },
+        '5 - Prestressed Concrete' : {
+            'color': '#92DDAF',
+            'name': 'PC'
+        },
+        '6 - Prestressed Concrete Continuous': {
+            'color' : '#92DDAF',
+            'name' : 'PCC'
+        },
+        '7 - Wood or Timber' : {
+            'color' : '#E8475A',
+            'name' : 'WT'
+        },
+        '8 - Mansonry': {
+            'color' : '#5F4E79',
+            'name' : 'M'
+        },
+        '9 - Aluminum, Wrought Iron, or Cast Iron': {
+            'color': '#6697FB',
+            'name': 'AL'
+        }
+    }
+
     //Maps out drop downs for each category
     const mapData = function(data) {
         const result = [];
@@ -162,12 +207,12 @@ const detailedView = function({setModal,showModal,data}) {
                         {show &&  data[item].map((item,index)=>{
                             const key = Object.keys(item)[0];
                             return (
-                                <View style = {{flex:1, flexDirection:'row', justifyContent:'space-between', borderBottomWidth:1,borderBottomColor:'#E9E8E8', }}>
-                                    <View style = {{flex:1, justifyContent:'center'}}>
-                                        <Text style = {{fontSize:15,fontWeight: 'bold',paddingTop:10, paddingBottom: 10}} key = {index}>{key}</Text>
+                                <View style = {{flex:1, flexDirection:'row', borderBottomWidth:1,borderBottomColor:'#E9E8E8',}}>
+                                    <View style = {{flex:4, justifyContent:'center'}}>
+                                        <Text style = {{fontSize:15,fontWeight: 'bold',padding:16,paddingLeft:0,paddingRight:20}} key = {index}>{key}</Text>
                                     </View>
-                                    <View style = {{flex:1, justifyContent:'center'}}>
-                                        <Text style = {{fontSize:15, textAlign:'right',paddingTop:10, paddingBottom: 10}}>{item[key]}</Text>
+                                    <View style = {{flex:3, justifyContent:'center'}}>
+                                        <Text style = {{fontSize:15, textAlign:'right',padding:11}}>{item[key]}</Text>
                                     </View>
                                 </View>
                             )
@@ -209,37 +254,43 @@ const detailedView = function({setModal,showModal,data}) {
         <View>
             <Modal style = {{margin:0,backgroundColor:'white'}} isVisible = {showModal}>
                 <View style = {{position:'relative',width: '100%',height: '40%', zIndex: 2}}>
-                    <TouchableOpacity onPress = {()=>showPic(!pic)} style = {{backgroundColor: !pic? 'grey':null, height: '80%',width: '100%',}}>
-                        {pic? 
-                        <Text>Showing pic</Text>
-                            :
-                         //Top
-                        <View style = {{flex:1,}}>
+                    <TouchableOpacity onPress = {()=>showPic(!pic)} style = {{height: '80%',width: '100%',}}>
+                        <ImageBackground style = {{height: 286, tintColor: 'cyan',}} source = {require('../../assets/bridge_placeholder_large.png')} >
+                        {/*{pic? 
+                        <Image style = {{height: 286}}source = {require('../../assets/bridge_placeholder_large.png')}/>
+                            :*/}
+                         {/*//Top*/}
+                         {pic?
+                        <View style = {{flex:1, backgroundColor: pic ?'rgba(100,100,100,0.7)' : null}}>
+
                             <View style = {{width: '100%', flex:3}}>
-                                <TouchableOpacity style = {{top: '60%', left: '5%'}} onPress = {()=>setModal(false)}><Text>Back</Text></TouchableOpacity>
+                                <TouchableOpacity style = {{top: '60%', left: '5%',width:'15%'}} onPress = {()=>setModal(false)}><BackButton/></TouchableOpacity>
                             </View>
                             <View style = {{width: '100%', flex:2}}>
-                                <Text style = {{fontSize: 50, textAlign:'center'}}>#{id}</Text>
-                            </View>
-                            <View style = {{flex:3, marginLeft: '5%'}}>
-                                <View style = {{alignSelf: 'left', height: '40%'}}>
-                                    <Text style = {{overflow: 'hidden',borderRadius: 10,fontSize: 15,height: '70%',backgroundColor:'white', paddingTop: '1.5%', textAlign:'left', marginTop: '3%', padding: '1%'}}>{material}</Text>
-                                </View>
-                                <View style = {{alignSelf: 'left', height: '40%'}}>
-                                    <Text style = {{overflow: 'hidden',borderRadius: 10, fontSize: 15,height: '70%',backgroundColor:'white', padding: '1.5%', textAlign:'left', marginTop: '3%', padding: '1%'}}>{type}</Text>
-                                </View>
+                                <Text style = {{fontSize: 50, textAlign:'center', fontWeight:'bold', color: 'white'}}>#{id}</Text>
                             </View>
                             
+                            <View style = {{flex:3, marginLeft: '5%',}}>
+                                <View style = {{alignSelf: 'left', height: '40%'}}>
+                                    <Text style = {{overflow: 'hidden',borderRadius: 10,fontSize: 15,height: '70%',backgroundColor:'white', paddingTop: '1.5%', textAlign:'left', marginTop: '3%', padding: '5%'}}>{material}</Text>
+                                </View>
+                                <View style = {{alignSelf: 'left', height: '40%'}}>
+                                    <Text style = {{overflow: 'hidden',borderRadius: 10, fontSize: 15,height: '80%',backgroundColor:'white', padding: '1.5%', textAlign:'left', marginTop: '3%', paddingTop:'2%', paddingLeft:'5%',paddingRight:'5%'}}>{type}</Text>
+                                </View>
+                            </View>
                         </View>
+                        : 
+                        <TouchableOpacity style = {{top: '23%', left: '5%',width:'15%'}} onPress = {()=>setModal(false)}><BackButton/></TouchableOpacity>
                         }
+                        </ImageBackground>
                     </TouchableOpacity>
                     <View style = {{flex:1, flexDirection:'row', }} >
-                        <View style = {{flex: 2}}>
-                            <Text>Icon</Text>
+                        <View style = {{flex: 2, justifyContent:'center', alignItems:'center'}}>
+                           {data? <Svg height = {50} width = {50} name = {materialMap[material].name} color = {materialMap[material].color}/> : null}
                         </View>
                         <View style = {{flex: 5}}>
-                            <Text style = {{textAlign:'right', fontSize: 15, marginTop: '4%',marginRight: '4%', fontWeight: 'bold'}}>Year Built: {year_built} </Text>
-                            <Text style = {{textAlign:'right', fontSize: 15, marginRight: '4%', marginRight:'4%', textDecorationLine: 'underline'}}>{county}, California</Text>
+                            <Text style = {{textAlign:'right', fontSize: 15, marginTop: '5%',marginRight: '4%', fontWeight: 'bold'}}>Year Built: {year_built} </Text>
+                            <Text style = {{textAlign:'right', fontSize: 15, marginRight: '4%', marginTop: '1%',marginRight:'4%', textDecorationLine: 'underline'}}>{county}, California</Text>
                         </View>
                     </View>
                 </View>

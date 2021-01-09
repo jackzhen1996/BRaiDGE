@@ -2,9 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {TouchWithoutFeedback,Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem , DrawerItemList} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Home from './src/components/home.js';
+import ABC from './src/components/abcForm.js';
 import SavedBridges from './src/components/savedBridges.js';
 import Splash from './src/components/splash.js';
+import SearchIcon from './assets/search.tsx';
+import HeartIcon from './assets/heart.tsx';
+import BackArrow from './assets/backArrow.tsx';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,6 +27,7 @@ const DrawerContent = function(props) {
 
 
 export default function App() { 
+  //const navigation = useNavigation()
   //var data = require('./data/new_data_latlong_JSON.json');
 
   
@@ -58,9 +65,13 @@ export default function App() {
   return (
     <NavigationContainer>
     <Drawer.Navigator drawerContent = {(props)=><DrawerContent {...props}/>}initialRouteName = 'Splash'>
-      <Drawer.Screen options = {{drawerLabel: ()=>null, drawerIcon:()=>null}} name = 'Splash' component = {Splash}/>
-      <Drawer.Screen name = 'Home'  component = {Home}/>
-      <Drawer.Screen name = "Saved" component = {SavedBridges} />
+      {/*<Drawer.Screen options = {{drawerLabel: ()=>null, drawerIcon:()=>null}} name = 'Splash' component = {Splash}/>*/}
+      <Drawer.Screen options = {{drawerIcon:()=><SearchIcon/>, drawerLabel:()=><Text style = {{fontSize:20, fontWeight: '600'}}>Search</Text>}} name = 'Home'  component = {Home}/>
+      <Drawer.Screen 
+      options = {{
+        //headerLeft:()=><TouchableOpacity onPress = {()=>navigation.navigate('Home')} style = {{marginLeft: 10}}><BackArrow /></TouchableOpacity>,
+        headerStyle:{shadowOffset:{height:0},height:'10%',},headerTitle: null,headerShown: true,drawerIcon:()=><HeartIcon/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>Saved</Text>}} name = "Saved" component = {SavedBridges} />
+      <Drawer.Screen options = {{headerStyle:{shadowOffset:{height:0},height:'10%'},headerTitle: null,headerShown: true,drawerIcon:()=><HeartIcon/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>ABC Score Sheet</Text>}} name = "ABC Score Sheet" component = {ABC} />
     </Drawer.Navigator>
   </NavigationContainer>
   )

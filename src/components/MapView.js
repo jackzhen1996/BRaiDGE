@@ -1,6 +1,6 @@
 import MapView from 'react-native-maps';
 import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useEffect, useState, useMemo, useRef} from 'react';
 import DetailView from './detailedView.js';
 import Marker from './Marker.js';
 import SelectionPage from './selectionPage.js';
@@ -28,6 +28,8 @@ const Map = function ({receivedData, passToSelectionPage}) {
     //receivedData === null? [{'latitude':37.725170,'longitude':-122.438336}] : [{'latitude':receivedData.latitude,'longitude': receivedData.longitude}]
     //let mapRef = null;
 
+    console.log('hello')
+
     const mapData = function(dataArray) {
       if (!dataArray) {
         return null;
@@ -46,8 +48,10 @@ const Map = function ({receivedData, passToSelectionPage}) {
         })
     }
 
+
     //Not sure if memo is working
     const memoData = useMemo(()=>mapData(dataArray), [dataArray]);
+    
 
     useEffect(()=>{
         //check data array change, if so navigate to the location
@@ -61,17 +65,14 @@ const Map = function ({receivedData, passToSelectionPage}) {
             }
         )
     },[dataArray])
-
-    console.log(fullPageData)
-
+    
 
     return (
       <View>
         {selectionView &&
           <SelectionPage checkOnPress = {checkOnPress} fetchData = {fetchData} searchValue = {searchValue}/>
-        }
-      
-      {/*Exit preview on pressing on map*/}
+        }      
+      {/*Exit preview on pressing on map NOT WORKING*/}
       <TouchableWithoutFeedback onPress = {()=>getMarkerObject(null)}>
         <MapView
             ref = {(ref) => {mapRef = ref}}
@@ -105,7 +106,6 @@ const Map = function ({receivedData, passToSelectionPage}) {
           <DetailView data = {fullPageData} setModal = {goToDetailed} showModal = {detailed} />
           </MapView>
         </TouchableWithoutFeedback>
-
         {/*Map re-rendering causes the text bugs, place the rendering of the preview outside of the map*/}
         {markerObject &&
           <Preview fetchData = {fetchFullPage} goToDetailed = {goToDetailed} identifier = {markerObject} />
