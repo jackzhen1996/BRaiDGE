@@ -5,8 +5,7 @@ import DetailView from './detailedView.js';
 import Marker from './Marker.js';
 import SelectionPage from './selectionPage.js';
 import Preview from './previewContainer.js';
-
-
+import { useSelector } from 'react-redux';
 
 
 
@@ -19,7 +18,8 @@ const Map = function ({receivedData, passToSelectionPage}) {
     const [detailed,goToDetailed] = useState(false);
 
     //Data from fetching api containing coordinates and preview info
-    const dataArray = receivedData? receivedData: null;
+    const dataArray = useSelector(state=>state.session.rows);
+    //receivedData? receivedData: null;
 
     //Callback object from pressing on a marker
     const [markerObject, getMarkerObject] = useState(null);

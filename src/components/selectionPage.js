@@ -3,6 +3,7 @@ import React, {useEffect, useState,} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import {GET_LOCANDBASICINFO} from "./actions/session_actions.js";
 
 
 const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
@@ -19,7 +20,7 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
         }
         axios.post(url, {'location': search})
         //response is in json string or Python object string
-            .then(response => fetchData(response.data))
+            .then(response => dispatch({type: GET_LOCANDBASICINFO, data: response.data}))
             //.then(data => {
             //    fetchData(data);
             //});

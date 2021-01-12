@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {TouchWithoutFeedback,Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem , DrawerItemList} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { PersistGate } from 'redux-persist/integration/react';
 import { useNavigation } from '@react-navigation/native';
 import { Provider } from "react-redux";
-import configureStore from "./src/components/store/store.js";
+import configStore from "./src/components/store/store.js";
 import Home from './src/components/home.js';
 import SavedBridges from './src/components/savedBridges.js';
 import Prediction from './src/components/prediction.js';
@@ -20,7 +21,7 @@ import { Logs } from 'expo'
 Logs.enableExpoCliLogging()
 
 const Drawer = createDrawerNavigator();
-const store = configureStore();
+const store= configStore();
 
 const DrawerContent = function(props) {
   return (
@@ -66,6 +67,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store = {store}>
+        {/*<PersistGate loading = {null} persistor = {persistor}>*/}
         <Drawer.Navigator drawerContent = {(props)=><DrawerContent {...props}/>}initialRouteName = 'Splash'>
           {/*<Drawer.Screen options = {{drawerLabel: ()=>null, drawerIcon:()=>null}} name = 'Splash' component = {Splash}/>*/}
           <Drawer.Screen options = {{drawerIcon:()=><SearchIcon/>, drawerLabel:()=><Text style = {{fontSize:20, fontWeight: '600'}}>Search</Text>}} name = 'Home'  component = {Home}/>
@@ -75,6 +77,7 @@ export default function App() {
           <Drawer.Screen options = {{headerLeft:()=>null,headerStyle:{shadowOffset:{height:0},height:'6%',paddingTop:10} , headerTitle: null,headerShown: true,drawerIcon:()=><Clipboard/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>ABC Score Sheet</Text>}} name = "ABCStack" component = {ABCStack} />
           <Drawer.Screen options = {{headerShown: true, headerTitle:null,drawerIcon:()=><Dots/>, drawerLabel:()=><Text style = {{fontSize:20, fontWeight: '600' }}>Prediction</Text>}}name = "Prediction" component = {Prediction}/>
         </Drawer.Navigator>
+        {/*</PersistGate>*/}
       </Provider>
   </NavigationContainer>
   )

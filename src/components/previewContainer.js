@@ -3,8 +3,12 @@ import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet,
 import Heart from '../../assets/heart.tsx';
 import EmptyHeart from '../../assets/EmptyHeart.tsx';
 import axios from 'axios';
+import {GET_FULLPAGE} from "./actions/session_actions.js";
+import { useDispatch } from 'react-redux';
+
 
 const previewContainer = function({identifier, goToDetailed,fetchData, savePage, isLiked}) {
+  const dispatch = useDispatch();
   var changeStyle = null;
 
   const [heart,showHeart] = useState(false);
@@ -32,7 +36,7 @@ const previewContainer = function({identifier, goToDetailed,fetchData, savePage,
       //}
       axios.post(url, {'latitude': identifier})
       //response is in json string or Python object string
-          .then(response => fetchData(response.data))
+          .then(response => dispatch({type: GET_FULLPAGE ,data:response.data}));
           //.then(data => {
           //    console.log(data);
           //});

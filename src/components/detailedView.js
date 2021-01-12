@@ -3,13 +3,15 @@ import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, 
 import Modal from 'react-native-modal';
 import BackButton from '../../assets/backButton.tsx';
 import Svg from '../../assets/cc.tsx';
+import { useSelector } from 'react-redux';
 
 const detailedView = function({setModal,showModal,data}) {
     //Use useeffect to fetch required data in this view
         //POST api route test method
     const [pic,showPic] = useState(true);
 
-    const Data = data? data[0]: 'No data found';
+    const receiveDataFromRedux = useSelector(state=>state.session.markerObject);
+    const Data = receiveDataFromRedux[0];
 
     const material = Data['structure_kind_43a'];
     const type = Data['structure_type_43b'];
