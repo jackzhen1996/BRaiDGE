@@ -7,7 +7,7 @@ import pandas as pd
 #Output: JSON 
 def getRowsBasedOnCounty(county, data):
   rows =  (data.loc[data['county_name'] ==  county])
-  return rows[['latitude','longitude','structure_kind_43a','structure_type_43b','structure_number_008']].to_json(orient = 'records')
+  return rows[['latitude','longitude','structure_kind_43a','structure_type_43b','structure_number_008', 'marker_color']].to_json(orient = 'records')
 
 #get single row that matched latitude, returned only selected columns
 #use this in full page view

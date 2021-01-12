@@ -7,7 +7,11 @@ import SelectionPage from './selectionPage.js';
 import Preview from './previewContainer.js';
 
 
+
+
+
 const Map = function ({receivedData, passToSelectionPage}) {
+
     //Everything that are passed from App and seachbar
     const {checkOnPress,searchValue,fetchData,selectionView} = passToSelectionPage;
 
@@ -28,12 +32,8 @@ const Map = function ({receivedData, passToSelectionPage}) {
     //receivedData === null? [{'latitude':37.725170,'longitude':-122.438336}] : [{'latitude':receivedData.latitude,'longitude': receivedData.longitude}]
     //let mapRef = null;
 
-    console.log('hello')
-
     const mapData = function(dataArray) {
-      if (!dataArray) {
-        return null;
-      }
+      if (dataArray){
         return dataArray.map((point,index)=>{
             //Create tooltip description
             const title = "Bridge " + index;
@@ -46,6 +46,7 @@ const Map = function ({receivedData, passToSelectionPage}) {
                 <Marker getMarkerObject = {getMarkerObject} title = {title} text = {text} goToDetailed = {goToDetailed} point = {point} key = {index}/>
             )
         })
+      }
     }
 
 

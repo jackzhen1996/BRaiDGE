@@ -5,10 +5,11 @@ function SvgComponent(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={11.72}
-      height={20.41}
+      width={13.72}
+      height={22.41}
       viewBox="0 0 9.537 16.611"
       fill = '#257FF2'
+      strokeWidth = '3'
       {...props}
     >
       <G transform="rotate(-180 61.8 81.978)">

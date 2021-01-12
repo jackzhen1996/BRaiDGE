@@ -4,13 +4,16 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItem , DrawerItem
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import Home from './src/components/home.js';
-import ABC from './src/components/abcForm.js';
 import SavedBridges from './src/components/savedBridges.js';
+import ABCStack from './src/components/formStack.js';
 import Splash from './src/components/splash.js';
 import SearchIcon from './assets/search.tsx';
 import HeartIcon from './assets/heart.tsx';
 import BackArrow from './assets/backArrow.tsx';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Clipboard from './assets/clipboard.tsx';
+import { Logs } from 'expo'
+Logs.enableExpoCliLogging()
 
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +30,7 @@ const DrawerContent = function(props) {
 
 
 export default function App() { 
+
   //const navigation = useNavigation()
   //var data = require('./data/new_data_latlong_JSON.json');
 
@@ -34,14 +38,6 @@ export default function App() {
 
   //Test routes
 
-  //useEffect(() => {
-    //On PC, replace IP with address with IPv4
-    //Format :'IP'/'MY_API'
-  //  fetch('http:192.168.86.61:5000/time').then(res => res.json()).then(data => {
-  //    setSearch(data.time)
-  //  });
-  //  console.log(search)
-  //}, []);
 
   //const [selectionView, switchView] = useState(false);
 
@@ -69,9 +65,8 @@ export default function App() {
       <Drawer.Screen options = {{drawerIcon:()=><SearchIcon/>, drawerLabel:()=><Text style = {{fontSize:20, fontWeight: '600'}}>Search</Text>}} name = 'Home'  component = {Home}/>
       <Drawer.Screen 
       options = {{
-        //headerLeft:()=><TouchableOpacity onPress = {()=>navigation.navigate('Home')} style = {{marginLeft: 10}}><BackArrow /></TouchableOpacity>,
-        headerStyle:{shadowOffset:{height:0},height:'10%',},headerTitle: null,headerShown: true,drawerIcon:()=><HeartIcon/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>Saved</Text>}} name = "Saved" component = {SavedBridges} />
-      <Drawer.Screen options = {{headerStyle:{shadowOffset:{height:0},height:'10%'},headerTitle: null,headerShown: true,drawerIcon:()=><HeartIcon/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>ABC Score Sheet</Text>}} name = "ABC Score Sheet" component = {ABC} />
+        headerStyle:{shadowOffset:{height:0},height:'6%',},headerTitle: null,headerShown: true,drawerIcon:()=><HeartIcon/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>Saved</Text>}} name = "Saved" component = {SavedBridges} />
+      <Drawer.Screen options = {{headerLeft:()=>null,headerStyle:{shadowOffset:{height:0},height:'6%',paddingTop:10} , headerTitle: null,headerShown: true,drawerIcon:()=><Clipboard/>, drawerLabel: ()=><Text style = {{fontSize:20, fontWeight: '600' }}>ABC Score Sheet</Text>}} name = "ABCStack" component = {ABCStack} />
     </Drawer.Navigator>
   </NavigationContainer>
   )

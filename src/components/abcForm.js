@@ -1,5 +1,4 @@
-import React, {useEffect, useState,} from 'react';
-import { render } from 'react-dom';
+import React, {useEffect, useState, useRef} from 'react';
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image,ScrollView} from 'react-native';
 import { set } from 'react-native-reanimated';
 
@@ -13,9 +12,7 @@ const abcForm = function() {
     const riskManagement = ['Worker safety improvement', 'Traveler safety improvement via ABC', 'Any other risks managed by ABC?'];
     const other = ['Will repetition of elements allow for economy of scale?']; 
 
-    const [Rs,sumR] = useState(0);  
-    const [Ps,sumP] = useState(0); 
-
+    const [RP, sumRP] = useState();
     const renderSection = function(form) {          
     const result = form.map((row,index)=>{
         
@@ -24,15 +21,6 @@ const abcForm = function() {
         const regexR = /[1-5]/g;
         const regexP = /[1-3]/g;
 
-        const getR = function(r) {
-            setR(parseInt(r));
-            sumR(Rs+parseInt(r));
-        }
-
-        const getP = function(p) {
-            setP(parseInt(p));
-            sumP(Ps+parseInt(p));
-        }
 
         return(
             <View key = {index} style = {{display:'flex',flexDirection:'row', marginTop: '2.5%'}}>
@@ -41,14 +29,14 @@ const abcForm = function() {
                 <TextInput maxLength = {1}   
                 onChangeText = {
                     r=>regexR.test(r)? 
-                    getR(r)
+                    setR(parseInt(r))
                     : setR('0')
             }
                  keyboardType = 'numbers-and-punctuation' placeholder = '1-5' style = {[styles.inputBackground,{flex:1,marginRight: '3%', height: 34, textAlign:'center',}]}/>
                 <TextInput maxLength = {1} 
                 onChangeText = {
                     p=>regexP.test(p)? 
-                    getP(p)
+                    setP(parseInt(p))
                     : 
                     setP('0')
             } 
@@ -150,7 +138,7 @@ const abcForm = function() {
             <View style = {{height: '18%', borderTopWidth:1, width: '100%',display:'flex',borderTopColor:'#E9E8E8'}}>
                 <View style = {{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
                     <Text style = {[styles.header,{textAlign:'right',padding: '2%',}]}>ABC Rating </Text>
-                    <Text style = {{height: '100%', textAlign:'center', paddingTop:'3%',paddingLeft:'3%',paddingRight: '7%', fontSize: 15, color: '#78849E'}}>{Rs*Ps}</Text>
+                    <Text style = {{height: '100%', textAlign:'center', paddingTop:'3%',paddingLeft:'3%',paddingRight: '7%', fontSize: 15, color: '#78849E'}}>{}</Text>
                 </View>
                 <View style = {{flex:1, flexDirection:'row',justifyContent:'center', alignItems:'center'}}>
                     <TouchableOpacity style = {{borderColor: '#257FF2',height: '50%', width: '40%', borderWidth:2, marginRight: '10%', justifyContent:'center',alignItems:'center', borderRadius : 5}}><Text style = {{color: '#257FF2',fontSize:18,textAlign:'center',fontWeight:'bold'}}>Save Scoresheet</Text></TouchableOpacity>
@@ -177,6 +165,7 @@ const styles = StyleSheet.create({
 
     },
     scroll: {
+        marginTop: '5%',
         width:Dimensions.get('window').width,
         paddingBottom: '35%'
     },

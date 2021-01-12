@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {TouchWithoutFeedback,Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import MapView from './MapView.js';
-import DropDown from './/dropDownSearch.js';
+import DropDown from './dropDownSearch.js';
 
 
 const home = function() {  

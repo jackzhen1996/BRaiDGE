@@ -1,15 +1,13 @@
 import React, {useEffect, useState,} from 'react';
 import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground } from 'react-native';
 import Modal from 'react-native-modal';
-import ArrowDown from '../../assets/arrowDown.tsx';
-import ArrowUp from '../../assets/arrowUp.tsx';
 import BackButton from '../../assets/backButton.tsx';
 import Svg from '../../assets/cc.tsx';
 
 const detailedView = function({setModal,showModal,data}) {
     //Use useeffect to fetch required data in this view
         //POST api route test method
-    const [pic,showPic] = useState(false);
+    const [pic,showPic] = useState(true);
 
     const Data = data? data[0]: 'No data found';
 
@@ -18,10 +16,6 @@ const detailedView = function({setModal,showModal,data}) {
     const year_built = Data['year_built_027'];
     const county = Data['county_name'];
     const id = Data['structure_number_008'];
-
-
-    
-
 
     const fakeData= {
         'Identification and Location' : [
@@ -189,6 +183,7 @@ const detailedView = function({setModal,showModal,data}) {
     //Maps out drop downs for each category
     const mapData = function(data) {
         const result = [];
+        if (data) {
         for (const item in fakeData) {
             const [show,showInfo] = useState(false);
             result.push(
@@ -221,6 +216,7 @@ const detailedView = function({setModal,showModal,data}) {
                 </View>
             )
         }
+    }
         return result;
     }
     
@@ -296,7 +292,7 @@ const detailedView = function({setModal,showModal,data}) {
                 </View>
 
                     <ScrollView contentContainerStyle = {{alignItems:'center',paddingBottom:'10%',paddingTop:'2%', marginTop:20, marginLeft:14,marginRight:14, borderTopColor:'#E9E8E8', borderTopWidth:1 }}>
-                    {mapData(fakeData)}
+                    {mapData(fakeData) }
                     {/*<TouchableOpacity onPress = {()=>showInfo(!show)} style = {{display:'flex', flexDirection:'row'}}>
                         <Text style = {{width:'70%'}}>Identification and Location</Text>
                         <Text>more info</Text>

@@ -1,6 +1,7 @@
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase } from 'react-native';
 import React, {useEffect, useState,} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
+import axios from 'axios';
 
 const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
     const countyNames = require('../../data/geocodes.json');
@@ -13,12 +14,12 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({'location': search})
         }
-        fetch(url, requestOptions)
+        axios.post(url, {'location': search})
         //response is in json string or Python object string
-            .then(response => response.json())
-            .then(data => {
-                fetchData(data);
-            });
+            .then(response => fetchData(response.data))
+            //.then(data => {
+            //    fetchData(data);
+            //});
       }
 
     //Run each item in the data array thru regex test, and display only those who passed

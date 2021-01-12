@@ -2,7 +2,7 @@ import React, {useEffect, useState,} from 'react';
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image} from 'react-native';
 import Heart from '../../assets/heart.tsx';
 import EmptyHeart from '../../assets/EmptyHeart.tsx';
-
+import axios from 'axios';
 
 const previewContainer = function({identifier, goToDetailed,fetchData, savePage, isLiked}) {
   var changeStyle = null;
@@ -25,17 +25,17 @@ const previewContainer = function({identifier, goToDetailed,fetchData, savePage,
 
   var post_route = "http://192.168.86.61:5000/testID";
   const post_search = function(url,identifier) {
-      const requestOptions = {
-        method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({'latitude': identifier})
-      }
-      fetch(url, requestOptions)
+      //const requestOptions = {
+      //  method: 'POST',
+      //    headers: { 'Content-Type': 'application/json' },
+      //    body: JSON.stringify({'latitude': identifier})
+      //}
+      axios.post(url, {'latitude': identifier})
       //response is in json string or Python object string
-          .then(response => response.json())
-          .then(data => {
-              fetchData(data);
-          });
+          .then(response => fetchData(response.data))
+          //.then(data => {
+          //    console.log(data);
+          //});
     }
     const id = identifier? identifier.latitude : 0;
     return (
@@ -52,7 +52,7 @@ const previewContainer = function({identifier, goToDetailed,fetchData, savePage,
                   <Image style = {{width:150, height: 100, borderTopLeftRadius:13,}} source = {require('../../assets/bridge_placeholder.png')}/>
                 </View>
                 <View style = {{height: '25%',backgroundColor: 'white',borderBottomLeftRadius:13}}>
-                  <Text style = {{fontSize: 20, textAlign:'center', fontWeight:'bold',paddingRight: '10%', paddingTop: '2%',}}>#{structID}</Text>
+                  <Text selectable = {true} adjustsFontSizeToFit = {true} style = {{fontSize: 20, textAlign:'center', fontWeight:'bold',paddingRight: '10%', paddingTop: '2%',}}>#{structID}</Text>
                 </View>
             </View>
             <View style = {styles.text}>

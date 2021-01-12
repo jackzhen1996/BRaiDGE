@@ -1,10 +1,9 @@
-import {Marker, Callout} from 'react-native-maps';
+import {Marker, Callout,} from 'react-native-maps';
 import React, {useState} from 'react';
-import {Text, TouchableOpacity } from 'react-native';
+import {Text, Image, TouchableOpacity, View } from 'react-native';
 import Svg from '../../assets/cc.tsx';
 
 const useMarker = function({point,text,title,getMarkerObject,getPreview}) {
-    console.log(point)
     //var post_route = "http://192.168.86.61:5000/getPreview";
     //var [postData,setData] = useState(null);
     //const post_search = function(url,search) {
@@ -13,13 +12,6 @@ const useMarker = function({point,text,title,getMarkerObject,getPreview}) {
     //        headers: { 'Content-Type': 'application/json' },
     //        body: JSON.stringify({'latitude': search})
     //    }
-    //    fetch(url, requestOptions)
-    //    //response is in json string or Python object string
-    //        .then(response => response.json())
-    //        .then(data => {
-    //            getPreview(data);
-    //        });
-    //  }
     const materialMap = {
         '0 - Other': {
             'color': 'black',
@@ -73,9 +65,15 @@ const useMarker = function({point,text,title,getMarkerObject,getPreview}) {
         }}    
         //Pass structural ID as identifier
         identifier = {title}        
-        key = {point.latitude}                   
+        key = {point.latitude}
+        pinColor = {point['marker_color']}
+        style = {{height:20,width:20}}
     >
-        <Svg height = {20} width = {20} name = {materialMap[point["structure_kind_43a"]].name} color = {materialMap[point["structure_kind_43a"]].color}/>
+        {/*<Svg height = {20} width = {20} name = {materialMap[point["structure_kind_43a"]].name} color = {materialMap[point["structure_kind_43a"]].color}/>*/}
+        {/*<Image fadeDuration = {0}  style = {{height: 20, width: 20}} source = {require('../../assets/testIcon.png')}/>*/}
+        {/*<View style = {{height:25,width:25, backgroundColor:point['marker_color'], borderRadius: '100%', borderWidth:1, borderColor: 'white'}}>
+            <Text style = {{color: 'white', fontSize:15}}>Al</Text>
+            </View>*/}
     </Marker>
     )
 };
