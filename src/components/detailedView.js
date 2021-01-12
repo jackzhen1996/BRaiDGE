@@ -132,7 +132,7 @@ const detailedView = function({setModal,showModal,data}) {
             {'Average Daily Truck Traffic (Percent ADT)': Data['percent_adt_truck_109']},
             {'Designated National Truck Network Code': Data['national_network_110']},
             {'Future Average Daily Traffic': Data['future_adt_114']},
-            {'Year of Fture Average Daily Traffic': Data['year_of_future_adt_115']}
+            {'Year of Future Average Daily Traffic': Data['year_of_future_adt_115']}
 
         ]
     }

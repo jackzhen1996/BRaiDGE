@@ -141,8 +141,8 @@ const abcForm = function() {
                     <Text style = {{height: '100%', textAlign:'center', paddingTop:'3%',paddingLeft:'3%',paddingRight: '7%', fontSize: 15, color: '#78849E'}}>{}</Text>
                 </View>
                 <View style = {{flex:1, flexDirection:'row',justifyContent:'center', alignItems:'center'}}>
-                    <TouchableOpacity style = {{borderColor: '#257FF2',height: '50%', width: '40%', borderWidth:2, marginRight: '10%', justifyContent:'center',alignItems:'center', borderRadius : 5}}><Text style = {{color: '#257FF2',fontSize:18,textAlign:'center',fontWeight:'bold'}}>Save Scoresheet</Text></TouchableOpacity>
-                    <TouchableOpacity style = {{backgroundColor: '#257FF2',height: '50%', width: '40%',  justifyContent:'center',alignItems:'center',borderRadius : 5}}><Text style = {{color: 'white',fontSize:18, textAlign:'center',fontWeight:'bold'}}>Email Scoresheet</Text></TouchableOpacity>
+                    <TouchableOpacity style = {{borderColor: '#257FF2',height: '50%', width: '40%', borderWidth:2, marginRight: '10%', justifyContent:'center',alignItems:'center', borderRadius : 30}}><Text style = {{color: '#257FF2',fontSize:18,textAlign:'center',fontWeight:'bold'}}>Save Scoresheet</Text></TouchableOpacity>
+                    <TouchableOpacity style = {{backgroundColor: '#257FF2',height: '50%', width: '40%',  justifyContent:'center',alignItems:'center',borderRadius : 30}}><Text style = {{color: 'white',fontSize:18, textAlign:'center',fontWeight:'bold'}}>Email Scoresheet</Text></TouchableOpacity>
                 </View>
             </View>
         

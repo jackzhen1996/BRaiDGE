@@ -2,8 +2,11 @@ import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet,
 import React, {useEffect, useState,} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+
 
 const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
+    const dispatch = useDispatch();
     const countyNames = require('../../data/geocodes.json');
 
     //POST api route test method
