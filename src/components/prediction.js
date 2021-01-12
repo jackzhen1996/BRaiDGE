@@ -1,7 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image,ScrollView} from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import {GET_PREDICTION} from './actions/session_actions.js';
 
 const fields = [
     {"desc": "Number of Spans in Main Unit (45)", "ph": "Example: 7"},
@@ -14,7 +15,7 @@ const fields = [
     ]
 
  const prediction = function() {
-    //const dispatch = useDispatch()
+    const dispatch = useDispatch()
     //const test = useSelector(state=>state.session.markerObject);
 
     const mapFields = fields.map((field,index)=>(
@@ -33,7 +34,7 @@ const fields = [
             </View>
             <ScrollView contentContainerStyle = {styles.scroll}>
                 {mapFields}
-                <TouchableOpacity onPress = {()=>dispatch({type: "GET_FULLPAGE", payload: "details"})} style = {{marginTop: '10%',height: 45, width: 165, backgroundColor: "#257FF2", borderRadius: 30, justifyContent:'center', alignItems:'center', alignSelf:'center'}}><Text style = {{fontSize:18,color: 'white'}}>Make Prediction</Text></TouchableOpacity>
+                <TouchableOpacity onPress = {()=>dispatch({type: GET_PREDICTION, payload: "form"})} style = {{marginTop: '10%',height: 45, width: 165, backgroundColor: "#257FF2", borderRadius: 30, justifyContent:'center', alignItems:'center', alignSelf:'center'}}><Text style = {{fontSize:18,color: 'white'}}>Make Prediction</Text></TouchableOpacity>
             </ScrollView>
 
         </View>

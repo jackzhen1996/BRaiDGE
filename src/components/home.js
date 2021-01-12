@@ -6,31 +6,22 @@ import DropDown from './dropDownSearch.js';
 
 const home = function() {  
     const [selectionView, switchView] = useState(false);
-
-    //Mid-point variables
-    //Pass setValue into Dropdown to catch value entered, 
-    //pass searchValue into SelectionPage to run regex test and display results
     const [searchValue,setValue] = useState(null);
-    //coordinates in this test is the county name
-    const [coordinates, fetchCoordinates] = useState(null);
-
-    //const rawCountyData = require('./data/lat_long_allcounties.json');
-    //const filteredData = rawCountyData.filter(data=>data['county_names'] === coordinates)
+    const [selectedValue, setSelected] = useState(null);
 
     const passToSelectionPage = {
     'checkOnPress': switchView,
-    'fetchData': fetchCoordinates,
     'searchValue': searchValue,
-    'selectionView': selectionView
+    'selectionView': selectionView,
+    'setSelected': setSelected,
     };
 
     return (
         <View style = {styles.container}>
-        <MapView receivedData = {coordinates} passToSelectionPage = {passToSelectionPage}/>
+        <MapView passToSelectionPage = {passToSelectionPage}/>
         <TouchableWithoutFeedback onPress = {()=>Keyboard.dismiss()}>
-          <DropDown searchingFor = {setValue} checkOnPress = {switchView} isFocused = {selectionView}/> 
+          <DropDown selected = {selectedValue} searchingFor = {setValue} checkOnPress = {switchView} isFocused = {selectionView}/> 
         </TouchableWithoutFeedback>
-        {/*{selectionView && <SelectionPage checkOnPress = {switchView} fetchData = {fetchCoordinates} searchValue = {searchValue}/>  }*/}
         </View>  
     )
 }

@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {TouchWithoutFeedback,Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem , DrawerItemList} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { PersistGate } from 'redux-persist/integration/react';
-import { useNavigation } from '@react-navigation/native';
 import { Provider } from "react-redux";
 import configStore from "./src/components/store/store.js";
 import Home from './src/components/home.js';
@@ -36,33 +34,6 @@ const DrawerContent = function(props) {
 
 
 export default function App() { 
-
-  //const navigation = useNavigation()
-  //var data = require('./data/new_data_latlong_JSON.json');
-
-  
-
-  //Test routes
-
-
-  //const [selectionView, switchView] = useState(false);
-
-  //Mid-point variables
-  //Pass setValue into Dropdown to catch value entered, 
-  //pass searchValue into SelectionPage to run regex test and display results
-  //const [searchValue,setValue] = useState(null);
-  //coordinates in this test is the county name
-  //const [coordinates, fetchCoordinates] = useState(null);
-
-  //const rawCountyData = require('./data/lat_long_allcounties.json');
-  //const filteredData = rawCountyData.filter(data=>data['county_names'] === coordinates)
-
-// const passToSelectionPage = {
-//  'checkOnPress': switchView,
-//  'fetchData': fetchCoordinates,
-//  'searchValue': searchValue,
-//  'selectionView': selectionView
-// };
 
   return (
     <NavigationContainer>

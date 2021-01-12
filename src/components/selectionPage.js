@@ -1,29 +1,19 @@
-import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase } from 'react-native';
-import React, {useEffect, useState,} from 'react';
+import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, LayoutAnimation } from 'react-native';
+import React, {useEffect, useState,useContext} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import {GET_LOCANDBASICINFO} from "./actions/session_actions.js";
 
-
-const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
+const selectionPage = function({searchValue,checkOnPress, setSelected}) {
     const dispatch = useDispatch();
     const countyNames = require('../../data/geocodes.json');
-
+    let countyContext;
     //POST api route test method
     var post_route = "http://192.168.86.61:5000/testData";
     const post_search = function(url,search) {
-        const requestOptions = {
-          method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'location': search})
-        }
         axios.post(url, {'location': search})
-        //response is in json string or Python object string
             .then(response => dispatch({type: GET_LOCANDBASICINFO, data: response.data}))
-            //.then(data => {
-            //    fetchData(data);
-            //});
       }
 
     //Run each item in the data array thru regex test, and display only those who passed
@@ -31,6 +21,13 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
             return(
                 <TouchableOpacity 
                     onPress = {()=>{
+                        LayoutAnimation.configureNext( LayoutAnimation.create(
+                            170,
+                            LayoutAnimation.Types.keyboard,
+                            LayoutAnimation.Properties.opacity
+                          ));
+            
+                    setSelected(item['CountyName']);
                     post_search(post_route,item['CountyName']);
                     checkOnPress(false);
                     }}

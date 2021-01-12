@@ -1,6 +1,10 @@
-import {GET_FULLPAGE, GET_LOCANDBASICINFO} from '../actions/session_actions.js';
+import {GET_FULLPAGE, 
+        GET_LOCANDBASICINFO,
+        GET_PREDICTION
 
-const sessionReducer = (state = {markerObject: 'no data', rows: null}, action) => {
+} from '../actions/session_actions.js';
+
+const sessionReducer = (state = {markerObject: 'no data', rows: null, prediction: null}, action) => {
     switch (action.type) {
         case GET_FULLPAGE:
             console.log(action.data);
@@ -10,12 +14,16 @@ const sessionReducer = (state = {markerObject: 'no data', rows: null}, action) =
             };
         
         case GET_LOCANDBASICINFO:
-            //console.log(action.data);
             return {
                 ...state,
                 rows: action.data
             };
-
+        
+        case GET_PREDICTION:
+            return {
+                ...state,
+                prediction: action.data
+            }
         default:
             return state;
     }

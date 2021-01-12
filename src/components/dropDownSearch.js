@@ -1,13 +1,14 @@
-import {Image,Dimensions,Input,Button,TextInput, StyleSheet, Text, View,TouchableWithoutFeedback, Keyboard } from 'react-native';
-import React, {useEffect, useState,} from 'react';
-import { useNavigation } from '@react-navigation/native';
+import {Image,Dimensions,Input,Button,TextInput, StyleSheet, Text, View,TouchableWithoutFeedback, Keyboard,LayoutAnimation } from 'react-native';
+import React, {useEffect, useState,createRef} from 'react';
+import { useNavigation ,} from '@react-navigation/native';
 import MenuIcon from '../../assets/icons-menu.tsx';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-const DropDown = function({checkOnPress,isFocused,searchingFor}) {
+const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
     //onTextChange checks for matched results
     const navigation = useNavigation();
+    const [textRef,setRef] = useState(createRef());
 
     return (
         <View style = {{height: '5%',width:'100%',position:'absolute',top:50, display: 'flex', flexDirection: 'row', justifyContent:'space-evenly'}}>
@@ -24,19 +25,42 @@ const DropDown = function({checkOnPress,isFocused,searchingFor}) {
                 clearTextOnFocus = {true}
                 placeholder = 'Enter county name'
                 //Navigates to SelectionPage
-                onFocus = {()=>checkOnPress(true)}
+                onFocus = {()=>{
+                    LayoutAnimation.configureNext( LayoutAnimation.create(
+                        170,
+                        LayoutAnimation.Types.keyboard,
+                        LayoutAnimation.Properties.opacity
+                      ));
+                    checkOnPress(true)
+                }}
                 //SelectionPage catches this value by callback function
-                onChangeText = {(value)=>searchingFor(value)}
+                onChangeText = {(value)=>{
+                    searchingFor(value);
+                }
+                }
+                //value = {selected}
             />
             </View>
             {isFocused?
-             <Button color = 'black' title = 'Cancel' onPress = {
+             <TouchableOpacity
+             style = {{height: '100%', justifyContent:'center'}}
+             onPress = {
                  ()=>{
+                    LayoutAnimation.configureNext( LayoutAnimation.create(
+                        170,
+                        LayoutAnimation.Types.keyboard,
+                        LayoutAnimation.Properties.opacity
+                      ));
+                     
                      checkOnPress(false);
                      Keyboard.dismiss();
                     }
 
-                }/> 
+                }> 
+                <Text style = {{fontSize: 15}}>
+                    Cancel
+                </Text>
+            </TouchableOpacity>
             : 
                 null
             }
@@ -54,6 +78,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
       },
       searchBar: {
+        paddingTop: 2,
         backgroundColor:'white',
         borderRadius: 20,
         width:'80%', 

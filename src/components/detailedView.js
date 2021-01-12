@@ -1,13 +1,11 @@
 import React, {useEffect, useState,} from 'react';
-import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground } from 'react-native';
+import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground,LayoutAnimation } from 'react-native';
 import Modal from 'react-native-modal';
 import BackButton from '../../assets/backButton.tsx';
 import Svg from '../../assets/cc.tsx';
 import { useSelector } from 'react-redux';
 
-const detailedView = function({setModal,showModal,data}) {
-    //Use useeffect to fetch required data in this view
-        //POST api route test method
+const detailedView = function({setModal,showModal}) {
     const [pic,showPic] = useState(true);
 
     const receiveDataFromRedux = useSelector(state=>state.session.markerObject);
@@ -112,12 +110,9 @@ const detailedView = function({setModal,showModal,data}) {
             {'Bridge Posting Code': Data['posting_eval_070']},
         ],
         'Traffic and Roadway Data': [
-            {'Record Type': 'Cant find this'},
             {'Route Signing Prefix Code': Data['route_prefix_5b']},
             {'Designated Level of Service Code': Data['service_level_5c']},
-            {'Route Number': 'Cant find this'},
             {'Directional Suffix Code': Data['direction_5e']},
-            {'Base Highway Network': 'cant find this'},
             {'Bypass or Detour Length, miles': Data['detour_miles']},
             {'Toll Status': Data['toll_20']},
             {'Functional Class of Inventory': Data['functional_class_26']},
@@ -189,8 +184,18 @@ const detailedView = function({setModal,showModal,data}) {
         for (const item in fakeData) {
             const [show,showInfo] = useState(false);
             result.push(
-                <View style = {{flex:1, justifyContent:'space-evenly', paddingBottom:'2%'}}>
-                    <TouchableOpacity onPress = {()=>showInfo(!show)} style = {{display:'flex', flexDirection:'row',borderBottomWidth: show? 1: null, justifyContent:'space-between'}}>
+                <View key = {Object.keys(item)} style = {{flex:1, justifyContent:'space-evenly', paddingBottom:'2%'}}>
+                    {}
+                    <TouchableOpacity onPress = {
+                        ()=>{
+                            LayoutAnimation.configureNext( LayoutAnimation.create(
+                                1000,
+                                LayoutAnimation.Types.keyboard,
+                                LayoutAnimation.Properties.opacity
+                              ));
+                            showInfo(!show)
+                        }
+                        } style = {{display:'flex', flexDirection:'row',borderBottomWidth: show? 1: null, justifyContent:'space-between'}}>
                         <View style = {{width:'88%',}}>
                             <Text style = {{fontSize:20, paddingTop:15, fontWeight: 'bold',}}>{item}</Text>
                         </View>
@@ -204,7 +209,7 @@ const detailedView = function({setModal,showModal,data}) {
                         {show &&  data[item].map((item,index)=>{
                             const key = Object.keys(item)[0];
                             return (
-                                <View style = {{flex:1, flexDirection:'row', borderBottomWidth:1,borderBottomColor:'#E9E8E8',}}>
+                                <View key = {index} style = {{flex:1, flexDirection:'row', borderBottomWidth:1,borderBottomColor:'#E9E8E8',}}>
                                     <View style = {{flex:4, justifyContent:'center'}}>
                                         <Text style = {{fontSize:15,fontWeight: 'bold',padding:16,paddingLeft:0,paddingRight:20}} key = {index}>{key}</Text>
                                     </View>
@@ -284,7 +289,7 @@ const detailedView = function({setModal,showModal,data}) {
                     </TouchableOpacity>
                     <View style = {{flex:1, flexDirection:'row', }} >
                         <View style = {{flex: 2, justifyContent:'center', alignItems:'center'}}>
-                           {data? <Svg height = {50} width = {50} name = {materialMap[material].name} color = {materialMap[material].color}/> : null}
+                            <Svg height = {50} width = {50} name = {material &&  materialMap[material].name} color = { material &&  materialMap[material].color}/>
                         </View>
                         <View style = {{flex: 5}}>
                             <Text style = {{textAlign:'right', fontSize: 15, marginTop: '5%',marginRight: '4%', fontWeight: 'bold'}}>Year Built: {year_built} </Text>

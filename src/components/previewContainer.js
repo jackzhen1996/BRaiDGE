@@ -1,5 +1,5 @@
 import React, {useEffect, useState,} from 'react';
-import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image} from 'react-native';
+import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image,} from 'react-native';
 import Heart from '../../assets/heart.tsx';
 import EmptyHeart from '../../assets/EmptyHeart.tsx';
 import axios from 'axios';
@@ -7,7 +7,7 @@ import {GET_FULLPAGE} from "./actions/session_actions.js";
 import { useDispatch } from 'react-redux';
 
 
-const previewContainer = function({identifier, goToDetailed,fetchData, savePage, isLiked}) {
+const previewContainer = function({identifier, goToDetailed, savePage, isLiked}) {
   const dispatch = useDispatch();
   var changeStyle = null;
 
