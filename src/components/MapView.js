@@ -1,13 +1,17 @@
 import MapView from 'react-native-maps';
 import {Dimensions,Input,Button,TextInput, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useEffect, useState, useMemo, useRef} from 'react';
 import DetailView from './detailedView.js';
 import Marker from './Marker.js';
 import SelectionPage from './selectionPage.js';
 import Preview from './previewContainer.js';
 
 
+
+
+
 const Map = function ({receivedData, passToSelectionPage}) {
+
     //Everything that are passed from App and seachbar
     const {checkOnPress,searchValue,fetchData,selectionView} = passToSelectionPage;
 
@@ -29,9 +33,7 @@ const Map = function ({receivedData, passToSelectionPage}) {
     //let mapRef = null;
 
     const mapData = function(dataArray) {
-      if (!dataArray) {
-        return null;
-      }
+      if (dataArray){
         return dataArray.map((point,index)=>{
             //Create tooltip description
             const title = "Bridge " + index;
@@ -44,10 +46,13 @@ const Map = function ({receivedData, passToSelectionPage}) {
                 <Marker getMarkerObject = {getMarkerObject} title = {title} text = {text} goToDetailed = {goToDetailed} point = {point} key = {index}/>
             )
         })
+      }
     }
+
 
     //Not sure if memo is working
     const memoData = useMemo(()=>mapData(dataArray), [dataArray]);
+    
 
     useEffect(()=>{
         //check data array change, if so navigate to the location
@@ -61,17 +66,14 @@ const Map = function ({receivedData, passToSelectionPage}) {
             }
         )
     },[dataArray])
-
-    console.log(fullPageData)
-
+    
 
     return (
       <View>
         {selectionView &&
           <SelectionPage checkOnPress = {checkOnPress} fetchData = {fetchData} searchValue = {searchValue}/>
-        }
-      
-      {/*Exit preview on pressing on map*/}
+        }      
+      {/*Exit preview on pressing on map NOT WORKING*/}
       <TouchableWithoutFeedback onPress = {()=>getMarkerObject(null)}>
         <MapView
             ref = {(ref) => {mapRef = ref}}
@@ -105,7 +107,6 @@ const Map = function ({receivedData, passToSelectionPage}) {
           <DetailView data = {fullPageData} setModal = {goToDetailed} showModal = {detailed} />
           </MapView>
         </TouchableWithoutFeedback>
-
         {/*Map re-rendering causes the text bugs, place the rendering of the preview outside of the map*/}
         {markerObject &&
           <Preview fetchData = {fetchFullPage} goToDetailed = {goToDetailed} identifier = {markerObject} />

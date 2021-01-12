@@ -13,8 +13,8 @@ function SvgComponent(props) {
     {...props}
   >
     <Path fill="none" d="M0 0h24v24H0z" />
-    <Rect width={8} height={2} rx={1} transform="rotate(45 -6.01 14.389)" />
-    <Rect width={8} height={2} rx={1} transform="rotate(-45 22.696 -6.58)" />
+    <Rect y = {5} width={8} height={2} rx={1} transform="rotate(45 -6.01 14.389)" />
+    <Rect y = {5} width={8} height={2} rx={1} transform="rotate(-45 22.696 -6.58)" />
   </Svg>
   )
 }
