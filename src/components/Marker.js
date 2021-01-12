@@ -21,7 +21,7 @@ const useMarker = function({point,text,title,getMarkerObject,getPreview}) {
         onPress = {(event)=>{
             LayoutAnimation.configureNext( LayoutAnimation.create(
                 170,
-                LayoutAnimation.Types.keyboard,
+                LayoutAnimation.Types.linear,
                 LayoutAnimation.Properties.opacity
               ));
             getMarkerObject({'latitude':event.nativeEvent.coordinate.latitude, 'kind': point["structure_kind_43a"], 'type': point["structure_type_43b"], 'id': point['structure_number_008']})

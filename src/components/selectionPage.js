@@ -1,9 +1,12 @@
-import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, LayoutAnimation } from 'react-native';
-import React, {useEffect, useState,useContext} from 'react';
+import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, LayoutAnimation, Animated } from 'react-native';
+import React, {useEffect, useState,useContext, useRef} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import {GET_LOCANDBASICINFO} from "./actions/session_actions.js";
+import * as Animatable from 'react-native-animatable';
+
+const AnimateTouchable = Animatable.createAnimatableComponent(TouchableOpacity);
 
 const selectionPage = function({searchValue,checkOnPress, setSelected}) {
     const dispatch = useDispatch();
@@ -17,9 +20,14 @@ const selectionPage = function({searchValue,checkOnPress, setSelected}) {
       }
 
     //Run each item in the data array thru regex test, and display only those who passed
+
+
     const renderData = function({item}) {
             return(
-                <TouchableOpacity 
+                <AnimateTouchable
+                    animation = "zoomIn"
+                    duration = {500}
+                    useNativeDriver
                     onPress = {()=>{
                         LayoutAnimation.configureNext( LayoutAnimation.create(
                             170,
@@ -38,7 +46,7 @@ const selectionPage = function({searchValue,checkOnPress, setSelected}) {
                     <Text style = {{width:'85%',fontSize: 18, padding:'2.5%', textAlign:'left', }}>
                         {item['CountyName']}
                     </Text>
-                </TouchableOpacity>
+                </AnimateTouchable>
             )
         }
     

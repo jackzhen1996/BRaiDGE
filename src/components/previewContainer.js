@@ -5,6 +5,8 @@ import EmptyHeart from '../../assets/EmptyHeart.tsx';
 import axios from 'axios';
 import {GET_FULLPAGE} from "./actions/session_actions.js";
 import { useDispatch } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
+
 
 
 const previewContainer = function({identifier, goToDetailed, savePage, isLiked}) {
@@ -41,10 +43,12 @@ const previewContainer = function({identifier, goToDetailed, savePage, isLiked})
           //    console.log(data);
           //});
     }
+
     const id = identifier? identifier.latitude : 0;
     return (
     //On press with lead to the detailed page
-    <TouchableOpacity onPress = {()=>{
+    <TouchableOpacity
+      onPress = {()=>{
         goToDetailed(true)
         post_search(post_route,id)
         }} 
