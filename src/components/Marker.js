@@ -12,7 +12,6 @@ const useMarker = function({point,text,title,getMarkerObject,getPreview}) {
     //        body: JSON.stringify({'latitude': search})
     //    }
     const [tapped, setCurrentMarker] = useState(false);
-    console.log(tapped)
 
     return (
         <Marker 
@@ -31,8 +30,9 @@ const useMarker = function({point,text,title,getMarkerObject,getPreview}) {
         key = {point.latitude}
         pinColor = {point['marker_color']}
         style = {{height:20,width:20}}
+        title = {'#' + point['structure_number_008']}
     >
-        {/*<Svg height = {20} width = {20} name = {materialMap[point["structure_kind_43a"]].name} color = {materialMap[point["structure_kind_43a"]].color}/>*/}
+        {/*<Svg height = {20} width = {20} name = {"CC"} color = {point['marker_color']}/>*/}
         {/*<Image fadeDuration = {0}  style = {{height: 20, width: 20}} source = {require('../../assets/testIcon.png')}/>*/}
 
         {/*<View style = {{height:25,width:25, backgroundColor:point['marker_color'], borderRadius: '100%', borderWidth:1, borderColor: 'white'}}>

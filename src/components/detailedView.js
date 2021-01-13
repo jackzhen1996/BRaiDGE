@@ -2,7 +2,6 @@ import React, {useEffect, useState,} from 'react';
 import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground,LayoutAnimation } from 'react-native';
 import Modal from 'react-native-modal';
 import BackButton from '../../assets/backButton.tsx';
-import Svg from '../../assets/cc.tsx';
 import { useSelector } from 'react-redux';
 
 const detailedView = function({setModal,showModal}) {
@@ -71,7 +70,7 @@ const detailedView = function({setModal,showModal}) {
             {'Minimum Lateral Underclearance on Left, ft': Data['left_lat_und_mt_056']},
             {'Pier Abutment Protection Code': Data['pier_protection_111']},
             {'Minimum Vertical Clearance - Lift Bridge, ft': Data['min_nav_clr_mt_116']},
-            {'Deck Area': 'Deck width x deck length?'}
+            //{'Deck Area': 'Deck width x deck length?'}
         ],
         'Inspection': [
             {'Inspection Date': Data['date_of_inspect_090']},
@@ -134,48 +133,48 @@ const detailedView = function({setModal,showModal}) {
         ]
     }
 
-    const materialMap = {
-        '0 - Other': {
-            'color': 'black',
-            'name' : 'O'
-        },
-        '1 - Concrete': {
-            'color': '#FF8E14',
-            'name' : 'C'
-        },
-        '2 - Concrete Continuous': {
-            'color' : '#FF8E14',
-            'name': 'CC'
-        },
-        '3 - Steel' : {
-            'color': '#65C8FF',
-            'name': 'S'
-        },
-        '4 - Steel Continuous': {
-            'color': '#65C8FF',
-            'name': 'SC'
-        },
-        '5 - Prestressed Concrete' : {
-            'color': '#92DDAF',
-            'name': 'PC'
-        },
-        '6 - Prestressed Concrete Continuous': {
-            'color' : '#92DDAF',
-            'name' : 'PCC'
-        },
-        '7 - Wood or Timber' : {
-            'color' : '#E8475A',
-            'name' : 'WT'
-        },
-        '8 - Mansonry': {
-            'color' : '#5F4E79',
-            'name' : 'M'
-        },
-        '9 - Aluminum, Wrought Iron, or Cast Iron': {
-            'color': '#6697FB',
-            'name': 'AL'
-        }
-    }
+    //const materialMap = {
+    //    '0 - Other': {
+    //        'color': 'black',
+    //        'name' : 'O'
+    //    },
+    //    '1 - Concrete': {
+    //        'color': '#FF8E14',
+    //        'name' : 'C'
+    //    },
+    //    '2 - Concrete Continuous': {
+    //        'color' : '#FF8E14',
+    //        'name': 'CC'
+    //    },
+    //    '3 - Steel' : {
+    //        'color': '#65C8FF',
+    //        'name': 'S'
+    //    },
+    //    '4 - Steel Continuous': {
+    //        'color': '#65C8FF',
+    //        'name': 'SC'
+    //    },
+    //    '5 - Prestressed Concrete' : {
+    //        'color': '#92DDAF',
+    //        'name': 'PC'
+    //    },
+    //    '6 - Prestressed Concrete Continuous': {
+    //        'color' : '#92DDAF',
+    //        'name' : 'PCC'
+    //    },
+    //    '7 - Wood or Timber' : {
+    //        'color' : '#E8475A',
+    //        'name' : 'WT'
+    //    },
+    //    '8 - Mansonry': {
+    //        'color' : '#5F4E79',
+    //        'name' : 'M'
+    //    },
+    //    '9 - Aluminum, Wrought Iron, or Cast Iron': {
+    //        'color': '#6697FB',
+    //        'name': 'AL'
+    //    }
+    //}
 
     //Maps out drop downs for each category
     const mapData = function(data) {
@@ -289,7 +288,9 @@ const detailedView = function({setModal,showModal}) {
                     </TouchableOpacity>
                     <View style = {{flex:1, flexDirection:'row', }} >
                         <View style = {{flex: 2, justifyContent:'center', alignItems:'center'}}>
-                            <Svg height = {50} width = {50} name = {material &&  materialMap[material].name} color = { material &&  materialMap[material].color}/>
+                            <View style = {{height:50,width:50, backgroundColor:Data['marker_color'], borderRadius: '100%', borderWidth:1, borderColor: 'white', justifyContent:'center', alignItems:'center'}}>
+                                {/*<Text style = {{color: 'white', fontSize:20, fontWeight: 'bold', textAlign:'center'}}>{ materialMap[Data['structure_kind_43a']].name}</Text>*/}
+                            </View>
                         </View>
                         <View style = {{flex: 5}}>
                             <Text style = {{textAlign:'right', fontSize: 15, marginTop: '5%',marginRight: '4%', fontWeight: 'bold'}}>Year Built: {year_built} </Text>

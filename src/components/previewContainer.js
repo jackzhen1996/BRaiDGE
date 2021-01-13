@@ -77,7 +77,7 @@ const previewContainer = function({identifier, goToDetailed, savePage, isLiked})
                 }
                 </View>
                 <Text style = {styles.header}>Kind</Text>
-                <Text style = {styles.data}>{kind}</Text>
+                <Text duration = {100} style = {styles.data}>{kind}</Text>
                 <Text style = {styles.header} >Type</Text>
                 <Text style = {styles.data}>{type}</Text>
             </View>

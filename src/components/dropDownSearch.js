@@ -14,7 +14,7 @@ const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
         <View style = {{height: '5%',width:'100%',position:'absolute',top:50, display: 'flex', flexDirection: 'row', justifyContent:'space-evenly'}}>
             <View style = {styles.searchBar}>
             {/*<Image source = {require('../../assets/menu.svg')}/>*/}
-            <View style = {{height: '50%', alignSelf:'center', justifyContent:'center', marginLeft:'5%'}}>
+            <View style = {{height: '50%', alignSelf:'center', justifyContent:'center', marginLeft:'5%',}}>
                 <TouchableOpacity onPress = {()=>navigation.openDrawer()}>
                     <MenuIcon/>
                 </TouchableOpacity>
