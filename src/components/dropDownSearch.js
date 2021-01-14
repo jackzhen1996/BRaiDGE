@@ -3,6 +3,7 @@ import React, {useEffect, useState,createRef} from 'react';
 import { useNavigation ,} from '@react-navigation/native';
 import MenuIcon from '../../assets/icons-menu.tsx';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import styles from "./stylesheets/dropDownStyles.js";
 
 
 const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
@@ -11,17 +12,17 @@ const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
     const [textRef,setRef] = useState(createRef());
 
     return (
-        <View style = {{height: '5%',width:'100%',position:'absolute',top:50, display: 'flex', flexDirection: 'row', justifyContent:'space-evenly'}}>
+        <View style = {styles.container}>
             <View style = {styles.searchBar}>
             {/*<Image source = {require('../../assets/menu.svg')}/>*/}
-            <View style = {{height: '50%', alignSelf:'center', justifyContent:'center', marginLeft:'5%',}}>
+            <View style = {styles.menuContainer}>
                 <TouchableOpacity onPress = {()=>navigation.openDrawer()}>
                     <MenuIcon/>
                 </TouchableOpacity>
             </View>
             <TextInput 
                 clearButtonMode = 'always' 
-                style = {{borderRadius: 15,width: '80%',fontSize: 18,height:40,backgroundColor:'white', marginLeft:'5%'}}
+                style = {styles.input}
                 clearTextOnFocus = {true}
                 placeholder = 'Enter county name'
                 //Navigates to SelectionPage
@@ -43,7 +44,7 @@ const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
             </View>
             {isFocused?
              <TouchableOpacity
-             style = {{height: '100%', justifyContent:'center'}}
+             style = {styles.cancel}
              onPress = {
                  ()=>{
                     LayoutAnimation.configureNext( LayoutAnimation.create(
@@ -57,7 +58,7 @@ const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
                     }
 
                 }> 
-                <Text style = {{fontSize: 15}}>
+                <Text style = {styles.cancelFont}>
                     Cancel
                 </Text>
             </TouchableOpacity>
@@ -69,30 +70,6 @@ const DropDown = function({checkOnPress,isFocused,searchingFor,selected}) {
 
     )
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      searchBar: {
-        paddingTop: 2,
-        backgroundColor:'white',
-        borderRadius: 20,
-        width:'80%', 
-        flexDirection:'row',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-      }
-
-  });
 
 export default DropDown;
 
