@@ -40,7 +40,7 @@ def getBridgeInfo():
 
     
 #Returns row based on "county_names" column
-@app.route('/testData', methods = ['POST'])
+@app.route('/getRows', methods = ['POST'])
 def getRow():
     #get requst body
     req_data = request.get_json()
