@@ -1,5 +1,5 @@
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, LayoutAnimation, Animated } from 'react-native';
-import React, {useEffect, useState,useContext, useRef} from 'react';
+import React, {useEffect, useState,useContext,} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
