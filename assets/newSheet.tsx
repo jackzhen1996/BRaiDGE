@@ -19,11 +19,11 @@ function SvgComponent(props) {
         />
       </Defs>
       <Path
-        className="prefix__a"
+        id="prefix__a"
         d="M21.808 5.904H5.624A4.624 4.624 0 001 10.528v32.368a4.624 4.624 0 004.624 4.624h32.368a4.624 4.624 0 004.624-4.624V26.712"
       />
       <Path
-        className="prefix__a"
+        id="prefix__a"
         d="M39.148 2.436a4.904 4.904 0 016.936 6.936L24.12 31.336l-9.248 2.312 2.312-9.248z"
       />
     </Svg>

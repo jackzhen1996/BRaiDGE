@@ -1,10 +1,16 @@
 import React, {useEffect, useState,} from 'react';
-import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image} from 'react-native';
+import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View,Image,} from 'react-native';
 import Heart from '../../assets/heart.tsx';
 import EmptyHeart from '../../assets/EmptyHeart.tsx';
 import axios from 'axios';
+import {GET_FULLPAGE} from "./actions/session_actions.js";
+import { useDispatch } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 
-const previewContainer = function({identifier, goToDetailed,fetchData, savePage, isLiked}) {
+
+
+const previewContainer = function({identifier, goToDetailed, savePage, isLiked}) {
+  const dispatch = useDispatch();
   var changeStyle = null;
 
   const [heart,showHeart] = useState(false);
@@ -23,7 +29,8 @@ const previewContainer = function({identifier, goToDetailed,fetchData, savePage,
   const type = identifier.type;
   const structID = identifier.id;
 
-  var post_route = "http://192.168.86.61:5000/testID";
+  //var post_route = "http://192.168.86.61:5000/testID";
+  var real_route = "https://braige-app.herokuapp.com/getOneRow"
   const post_search = function(url,identifier) {
       //const requestOptions = {
       //  method: 'POST',
@@ -32,17 +39,19 @@ const previewContainer = function({identifier, goToDetailed,fetchData, savePage,
       //}
       axios.post(url, {'latitude': identifier})
       //response is in json string or Python object string
-          .then(response => fetchData(response.data))
+          .then(response => dispatch({type: GET_FULLPAGE ,data:response.data}));
           //.then(data => {
           //    console.log(data);
           //});
     }
+
     const id = identifier? identifier.latitude : 0;
     return (
     //On press with lead to the detailed page
-    <TouchableOpacity onPress = {()=>{
+    <TouchableOpacity
+      onPress = {()=>{
         goToDetailed(true)
-        post_search(post_route,id)
+        post_search(real_route,id)
         }} 
         style = {[styles.previewContainer, changeStyle]}>
             <View style = {styles.left}>
@@ -69,7 +78,7 @@ const previewContainer = function({identifier, goToDetailed,fetchData, savePage,
                 }
                 </View>
                 <Text style = {styles.header}>Kind</Text>
-                <Text style = {styles.data}>{kind}</Text>
+                <Text duration = {100} style = {styles.data}>{kind}</Text>
                 <Text style = {styles.header} >Type</Text>
                 <Text style = {styles.data}>{type}</Text>
             </View>

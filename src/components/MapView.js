@@ -5,32 +5,24 @@ import DetailView from './detailedView.js';
 import Marker from './Marker.js';
 import SelectionPage from './selectionPage.js';
 import Preview from './previewContainer.js';
+import { useSelector } from 'react-redux';
 
 
 
-
-
-const Map = function ({receivedData, passToSelectionPage}) {
+const Map = function ({passToSelectionPage}) {
 
     //Everything that are passed from App and seachbar
-    const {checkOnPress,searchValue,fetchData,selectionView} = passToSelectionPage;
+    const {checkOnPress,searchValue,fetchData,selectionView,setSelected} = passToSelectionPage;
 
     //Switch for going to detailed page
     const [detailed,goToDetailed] = useState(false);
 
     //Data from fetching api containing coordinates and preview info
-    const dataArray = receivedData? receivedData: null;
+    const dataArray = useSelector(state=>state.session.rows);
+    //receivedData? receivedData: null;
 
     //Callback object from pressing on a marker
     const [markerObject, getMarkerObject] = useState(null);
-
-    //fetch data from preview triggered api call to get full-page view
-    const [fullPageData, fetchFullPage] = useState(null);
-
-    //Received data from Flaks api
-    //const dataArray = 
-    //receivedData === null? [{'latitude':37.725170,'longitude':-122.438336}] : [{'latitude':receivedData.latitude,'longitude': receivedData.longitude}]
-    //let mapRef = null;
 
     const mapData = function(dataArray) {
       if (dataArray){
@@ -58,6 +50,7 @@ const Map = function ({receivedData, passToSelectionPage}) {
         //check data array change, if so navigate to the location
         
         mapRef.fitToCoordinates(
+          //Initial camera location shows the state of California
             dataArray? dataArray: [{'latitude':41.67887697778792,'longitude':-123.70054077152597},{'latitude':33.190311010731094,'longitude':-116.22217549450625} ]
         ,
             {
@@ -71,7 +64,7 @@ const Map = function ({receivedData, passToSelectionPage}) {
     return (
       <View>
         {selectionView &&
-          <SelectionPage checkOnPress = {checkOnPress} fetchData = {fetchData} searchValue = {searchValue}/>
+          <SelectionPage setSelected = {setSelected} checkOnPress = {checkOnPress} fetchData = {fetchData} searchValue = {searchValue}/>
         }      
       {/*Exit preview on pressing on map NOT WORKING*/}
       <TouchableWithoutFeedback onPress = {()=>getMarkerObject(null)}>
@@ -102,14 +95,13 @@ const Map = function ({receivedData, passToSelectionPage}) {
           //    }
           //  )}
           >
-          {/*<Marker point = {{'latitude':37.725170,'longitude':-122.438336}}/>*/}
           {memoData}
-          <DetailView data = {fullPageData} setModal = {goToDetailed} showModal = {detailed} />
+          <DetailView setModal = {goToDetailed} showModal = {detailed} />
           </MapView>
         </TouchableWithoutFeedback>
         {/*Map re-rendering causes the text bugs, place the rendering of the preview outside of the map*/}
         {markerObject &&
-          <Preview fetchData = {fetchFullPage} goToDetailed = {goToDetailed} identifier = {markerObject} />
+          <Preview  goToDetailed = {goToDetailed} identifier = {markerObject} />
         } 
         </View>
     )

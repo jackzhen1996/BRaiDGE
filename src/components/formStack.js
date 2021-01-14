@@ -16,7 +16,7 @@ const formStack = function() {
 
     return (
         <Stack.Navigator screenOptions = {{headerLeftContainerStyle:{marginLeft:15,marginBottom:20}, headerTitle: null,headerStyle:{height: 70},headerBackTitle:null, headerBackTitleVisible: null,}} initialRouteName = 'ABCHome'>
-            <Stack.Screen options = {{headerStyle : {shadowOffset:{height:0}}, headerLeft: ()=><TouchableOpacity onPress = {()=>navigation.navigate('Home')} style = {{marginLeft: 20}}><BackArrow /></TouchableOpacity>,}} name = 'ABCHome' component = {ABCHome}/>
+            <Stack.Screen options = {{headerStyle : {shadowOffset:{height:0}}, headerLeft: ()=><TouchableOpacity onPress = {()=>{navigation.navigate('Home')}} style = {{marginLeft: 20}}><BackArrow /></TouchableOpacity>,}} name = 'ABCHome' component = {ABCHome}/>
             <Stack.Screen options = {{headerStyle : {shadowOffset:{height:0}}, headerLeft: ()=><TouchableOpacity onPress = {()=>navigation.dispatch(popAction)} style = {{marginLeft: 20}}><BackArrow /></TouchableOpacity>}} name = 'scoresheet' component = {ABCForm}/>
         </Stack.Navigator>
     )

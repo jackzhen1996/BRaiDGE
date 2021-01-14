@@ -1,33 +1,43 @@
-import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase } from 'react-native';
-import React, {useEffect, useState,} from 'react';
+import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, LayoutAnimation, Animated } from 'react-native';
+import React, {useEffect, useState,useContext, useRef} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import {GET_LOCANDBASICINFO} from "./actions/session_actions.js";
+import * as Animatable from 'react-native-animatable';
 
-const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
+const AnimateTouchable = Animatable.createAnimatableComponent(TouchableOpacity);
+
+const selectionPage = function({searchValue,checkOnPress, setSelected}) {
+    const dispatch = useDispatch();
     const countyNames = require('../../data/geocodes.json');
-
+    let countyContext;
     //POST api route test method
-    var post_route = "http://192.168.86.61:5000/testData";
+    //var post_route = "http://192.168.86.61:5000/testData";
+    var real_route = "https://braige-app.herokuapp.com/getAllRows"
     const post_search = function(url,search) {
-        const requestOptions = {
-          method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'location': search})
-        }
         axios.post(url, {'location': search})
-        //response is in json string or Python object string
-            .then(response => fetchData(response.data))
-            //.then(data => {
-            //    fetchData(data);
-            //});
+            .then(response => dispatch({type: GET_LOCANDBASICINFO, data: response.data}))
       }
 
     //Run each item in the data array thru regex test, and display only those who passed
+
+
     const renderData = function({item}) {
             return(
-                <TouchableOpacity 
+                <AnimateTouchable
+                    animation = "zoomIn"
+                    duration = {500}
+                    useNativeDriver
                     onPress = {()=>{
-                    post_search(post_route,item['CountyName']);
+                        LayoutAnimation.configureNext( LayoutAnimation.create(
+                            170,
+                            LayoutAnimation.Types.keyboard,
+                            LayoutAnimation.Properties.opacity
+                          ));
+            
+                    setSelected(item['CountyName']);
+                    post_search(real_route,item['CountyName']);
                     checkOnPress(false);
                     }}
                     style = {{flex:1,flexDirection:'row', borderBottomColor:'#E9E8E8',borderBottomWidth:1, height:45, justifyContent:'space-around'}}
@@ -37,7 +47,7 @@ const selectionPage = function({data,searchValue,fetchData,checkOnPress}) {
                     <Text style = {{width:'85%',fontSize: 18, padding:'2.5%', textAlign:'left', }}>
                         {item['CountyName']}
                     </Text>
-                </TouchableOpacity>
+                </AnimateTouchable>
             )
         }
     

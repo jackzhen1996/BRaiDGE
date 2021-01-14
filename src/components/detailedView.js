@@ -1,15 +1,14 @@
 import React, {useEffect, useState,} from 'react';
-import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground } from 'react-native';
+import {ScrollView,TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, Image, ImageBackground,LayoutAnimation } from 'react-native';
 import Modal from 'react-native-modal';
 import BackButton from '../../assets/backButton.tsx';
-import Svg from '../../assets/cc.tsx';
+import { useSelector } from 'react-redux';
 
-const detailedView = function({setModal,showModal,data}) {
-    //Use useeffect to fetch required data in this view
-        //POST api route test method
+const detailedView = function({setModal,showModal}) {
     const [pic,showPic] = useState(true);
 
-    const Data = data? data[0]: 'No data found';
+    const receiveDataFromRedux = useSelector(state=>state.session.markerObject);
+    const Data = receiveDataFromRedux[0];
 
     const material = Data['structure_kind_43a'];
     const type = Data['structure_type_43b'];
@@ -71,7 +70,7 @@ const detailedView = function({setModal,showModal,data}) {
             {'Minimum Lateral Underclearance on Left, ft': Data['left_lat_und_mt_056']},
             {'Pier Abutment Protection Code': Data['pier_protection_111']},
             {'Minimum Vertical Clearance - Lift Bridge, ft': Data['min_nav_clr_mt_116']},
-            {'Deck Area': 'Deck width x deck length?'}
+            //{'Deck Area': 'Deck width x deck length?'}
         ],
         'Inspection': [
             {'Inspection Date': Data['date_of_inspect_090']},
@@ -110,12 +109,9 @@ const detailedView = function({setModal,showModal,data}) {
             {'Bridge Posting Code': Data['posting_eval_070']},
         ],
         'Traffic and Roadway Data': [
-            {'Record Type': 'Cant find this'},
             {'Route Signing Prefix Code': Data['route_prefix_5b']},
             {'Designated Level of Service Code': Data['service_level_5c']},
-            {'Route Number': 'Cant find this'},
             {'Directional Suffix Code': Data['direction_5e']},
-            {'Base Highway Network': 'cant find this'},
             {'Bypass or Detour Length, miles': Data['detour_miles']},
             {'Toll Status': Data['toll_20']},
             {'Functional Class of Inventory': Data['functional_class_26']},
@@ -132,53 +128,53 @@ const detailedView = function({setModal,showModal,data}) {
             {'Average Daily Truck Traffic (Percent ADT)': Data['percent_adt_truck_109']},
             {'Designated National Truck Network Code': Data['national_network_110']},
             {'Future Average Daily Traffic': Data['future_adt_114']},
-            {'Year of Fture Average Daily Traffic': Data['year_of_future_adt_115']}
+            {'Year of Future Average Daily Traffic': Data['year_of_future_adt_115']}
 
         ]
     }
 
-    const materialMap = {
-        '0 - Other': {
-            'color': 'black',
-            'name' : 'O'
-        },
-        '1 - Concrete': {
-            'color': '#FF8E14',
-            'name' : 'C'
-        },
-        '2 - Concrete Continuous': {
-            'color' : '#FF8E14',
-            'name': 'CC'
-        },
-        '3 - Steel' : {
-            'color': '#65C8FF',
-            'name': 'S'
-        },
-        '4 - Steel Continuous': {
-            'color': '#65C8FF',
-            'name': 'SC'
-        },
-        '5 - Prestressed Concrete' : {
-            'color': '#92DDAF',
-            'name': 'PC'
-        },
-        '6 - Prestressed Concrete Continuous': {
-            'color' : '#92DDAF',
-            'name' : 'PCC'
-        },
-        '7 - Wood or Timber' : {
-            'color' : '#E8475A',
-            'name' : 'WT'
-        },
-        '8 - Mansonry': {
-            'color' : '#5F4E79',
-            'name' : 'M'
-        },
-        '9 - Aluminum, Wrought Iron, or Cast Iron': {
-            'color': '#6697FB',
-            'name': 'AL'
-        }
-    }
+    //const materialMap = {
+    //    '0 - Other': {
+    //        'color': 'black',
+    //        'name' : 'O'
+    //    },
+    //    '1 - Concrete': {
+    //        'color': '#FF8E14',
+    //        'name' : 'C'
+    //    },
+    //    '2 - Concrete Continuous': {
+    //        'color' : '#FF8E14',
+    //        'name': 'CC'
+    //    },
+    //    '3 - Steel' : {
+    //        'color': '#65C8FF',
+    //        'name': 'S'
+    //    },
+    //    '4 - Steel Continuous': {
+    //        'color': '#65C8FF',
+    //        'name': 'SC'
+    //    },
+    //    '5 - Prestressed Concrete' : {
+    //        'color': '#92DDAF',
+    //        'name': 'PC'
+    //    },
+    //    '6 - Prestressed Concrete Continuous': {
+    //        'color' : '#92DDAF',
+    //        'name' : 'PCC'
+    //    },
+    //    '7 - Wood or Timber' : {
+    //        'color' : '#E8475A',
+    //        'name' : 'WT'
+    //    },
+    //    '8 - Mansonry': {
+    //        'color' : '#5F4E79',
+    //        'name' : 'M'
+    //    },
+    //    '9 - Aluminum, Wrought Iron, or Cast Iron': {
+    //        'color': '#6697FB',
+    //        'name': 'AL'
+    //    }
+    //}
 
     //Maps out drop downs for each category
     const mapData = function(data) {
@@ -187,8 +183,18 @@ const detailedView = function({setModal,showModal,data}) {
         for (const item in fakeData) {
             const [show,showInfo] = useState(false);
             result.push(
-                <View style = {{flex:1, justifyContent:'space-evenly', paddingBottom:'2%'}}>
-                    <TouchableOpacity onPress = {()=>showInfo(!show)} style = {{display:'flex', flexDirection:'row',borderBottomWidth: show? 1: null, justifyContent:'space-between'}}>
+                <View key = {Object.keys(item)} style = {{flex:1, justifyContent:'space-evenly', paddingBottom:'2%'}}>
+                    {}
+                    <TouchableOpacity onPress = {
+                        ()=>{
+                            LayoutAnimation.configureNext( LayoutAnimation.create(
+                                1000,
+                                LayoutAnimation.Types.keyboard,
+                                LayoutAnimation.Properties.opacity
+                              ));
+                            showInfo(!show)
+                        }
+                        } style = {{display:'flex', flexDirection:'row',borderBottomWidth: show? 1: null, justifyContent:'space-between'}}>
                         <View style = {{width:'88%',}}>
                             <Text style = {{fontSize:20, paddingTop:15, fontWeight: 'bold',}}>{item}</Text>
                         </View>
@@ -202,7 +208,7 @@ const detailedView = function({setModal,showModal,data}) {
                         {show &&  data[item].map((item,index)=>{
                             const key = Object.keys(item)[0];
                             return (
-                                <View style = {{flex:1, flexDirection:'row', borderBottomWidth:1,borderBottomColor:'#E9E8E8',}}>
+                                <View key = {index} style = {{flex:1, flexDirection:'row', borderBottomWidth:1,borderBottomColor:'#E9E8E8',}}>
                                     <View style = {{flex:4, justifyContent:'center'}}>
                                         <Text style = {{fontSize:15,fontWeight: 'bold',padding:16,paddingLeft:0,paddingRight:20}} key = {index}>{key}</Text>
                                     </View>
@@ -282,7 +288,9 @@ const detailedView = function({setModal,showModal,data}) {
                     </TouchableOpacity>
                     <View style = {{flex:1, flexDirection:'row', }} >
                         <View style = {{flex: 2, justifyContent:'center', alignItems:'center'}}>
-                           {data? <Svg height = {50} width = {50} name = {materialMap[material].name} color = {materialMap[material].color}/> : null}
+                            <View style = {{height:50,width:50, backgroundColor:Data['marker_color'], borderRadius: '100%', borderWidth:1, borderColor: 'white', justifyContent:'center', alignItems:'center'}}>
+                                {/*<Text style = {{color: 'white', fontSize:20, fontWeight: 'bold', textAlign:'center'}}>{ materialMap[Data['structure_kind_43a']].name}</Text>*/}
+                            </View>
                         </View>
                         <View style = {{flex: 5}}>
                             <Text style = {{textAlign:'right', fontSize: 15, marginTop: '5%',marginRight: '4%', fontWeight: 'bold'}}>Year Built: {year_built} </Text>

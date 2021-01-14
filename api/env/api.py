@@ -24,7 +24,7 @@ app = Flask(__name__)
 
 #    return {"latitude": latitude, "longitude":longitude}
 
-@app.route('/testID', methods = ['POST'])
+@app.route('/getOneRow', methods = ['POST'])
 def getBridgeInfo():
     req_data = request.get_json()
     latitude = req_data['latitude']
@@ -40,7 +40,7 @@ def getBridgeInfo():
 
     
 #Returns row based on "county_names" column
-@app.route('/testData', methods = ['POST'])
+@app.route('/getAllRows', methods = ['POST'])
 def getRow():
     #get requst body
     req_data = request.get_json()
