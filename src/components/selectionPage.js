@@ -13,7 +13,7 @@ const selectionPage = function({searchValue,checkOnPress, setSelected}) {
     const countyNames = require('../../data/geocodes.json');
     let countyContext;
     //POST api route test method
-    var post_route = "http://192.168.86.61:5000/testData";
+    var post_route = "https://braige-app.herokuapp.com/testData";
     const post_search = function(url,search) {
         axios.post(url, {'location': search})
             .then(response => dispatch({type: GET_LOCANDBASICINFO, data: response.data}))
