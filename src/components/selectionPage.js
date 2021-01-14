@@ -1,5 +1,5 @@
 import {TouchableOpacity,Dimensions,FlatList,Input,Button,TextInput, StyleSheet, Text, View, TouchableOpacityBase, LayoutAnimation, Animated } from 'react-native';
-import React, {useEffect, useState,useContext,} from 'react';
+import React, {useEffect, useState,useContext, useRef} from 'react';
 import MapPin from '../../assets/map-pin.tsx'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,8 @@ const selectionPage = function({searchValue,checkOnPress, setSelected}) {
     const countyNames = require('../../data/geocodes.json');
     let countyContext;
     //POST api route test method
-    var post_route = "https://braige-app.herokuapp.com/testData";
+    //var post_route = "http://192.168.86.61:5000/testData";
+    var real_route = "https://braige-app.herokuapp.com/getAllRows"
     const post_search = function(url,search) {
         axios.post(url, {'location': search})
             .then(response => dispatch({type: GET_LOCANDBASICINFO, data: response.data}))
@@ -36,7 +37,7 @@ const selectionPage = function({searchValue,checkOnPress, setSelected}) {
                           ));
             
                     setSelected(item['CountyName']);
-                    post_search(post_route,item['CountyName']);
+                    post_search(real_route,item['CountyName']);
                     checkOnPress(false);
                     }}
                     style = {{flex:1,flexDirection:'row', borderBottomColor:'#E9E8E8',borderBottomWidth:1, height:45, justifyContent:'space-around'}}

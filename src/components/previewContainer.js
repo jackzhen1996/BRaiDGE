@@ -29,7 +29,8 @@ const previewContainer = function({identifier, goToDetailed, savePage, isLiked})
   const type = identifier.type;
   const structID = identifier.id;
 
-  var post_route = "http://192.168.86.61:5000/testID";
+  //var post_route = "http://192.168.86.61:5000/testID";
+  var real_route = "https://braige-app.herokuapp.com/getOneRow"
   const post_search = function(url,identifier) {
       //const requestOptions = {
       //  method: 'POST',
@@ -50,7 +51,7 @@ const previewContainer = function({identifier, goToDetailed, savePage, isLiked})
     <TouchableOpacity
       onPress = {()=>{
         goToDetailed(true)
-        post_search(post_route,id)
+        post_search(real_route,id)
         }} 
         style = {[styles.previewContainer, changeStyle]}>
             <View style = {styles.left}>
