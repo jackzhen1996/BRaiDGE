@@ -9,7 +9,6 @@ which are cleaned up and re-organized using Python.
 #### Email: jackzhen999@gmail.com
 #### Linkedin: https://www.linkedin.com/in/jackzhen/
 
-### Logo
 ![](Screen%20Shot%202021-02-08%20at%2011.41.16%20PM.png)
 
 ### Bridge Info
