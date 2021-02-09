@@ -11,6 +11,9 @@ npm-debug.*
 *.cfg
 .flaskenv
 web-build/
+data/*
+api/*
+assets/*
 
 # macOS
 .DS_Store
