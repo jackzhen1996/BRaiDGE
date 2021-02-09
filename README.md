@@ -5,5 +5,8 @@ in the State of California. All data are mapped on Apple Map with an intuitive u
 bridge, similar to accessing housing data in Zillow or in AirBnB. The bridge data shown in this app are all obtained from the public database of FHWA (Federal Highway Adminstration),
 which are cleaned up and re-organized using Python. 
 
+### Menu
+![](Screen%20Shot%202021-02-08%20at%2011.40.15%20PM.png)
+
 Contact: jackzhen999@gmail.com
 
