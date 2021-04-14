@@ -1,4 +1,4 @@
-# Bridgely
+# BRaiDGE
 ## About
 Bridgely is an iOS app that aims to streamline the decision making process of bridge construction project, by providing a convenient and centralized tool to access all bridge data
 in the State of California. All data are mapped on Apple Map with an intuitive user interface, in which the user can access bridge data of any county and data of any individual 
