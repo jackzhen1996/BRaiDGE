@@ -22,12 +22,10 @@ which are cleaned up and re-organized using Python.
 ![bridge info](./braidge_info_demo.gif)
 * In-depth details of any bridge in California
 
-### Bridge Condition Scoresheet
+### Bridge Rating and Type Predictor
 ![](Screen%20Shot%202021-02-08%20at%2011.41.43%20PM.png)
-
-### Bridge Type Predictor (Future Implementation)
-![](Screen%20Shot%202021-02-08%20at%2011.43.15%20PM.png)
-
+* Calculate structural condition for a bridge
+* Predict the bridge type for bridge construction
 
 
 
