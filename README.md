@@ -19,7 +19,7 @@ which are cleaned up and re-organized using Python.
 * Can query bridges in California by counties
 
 ### Bridge Info
-![bridge info](./braidge_info_demo)
+![bridge info](./braidge_info_demo.gif)
 * In-depth details of any bridge in California
 
 ### Bridge Condition Scoresheet
