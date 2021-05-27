@@ -15,11 +15,11 @@ which are cleaned up and re-organized using Python.
 ![](Screen%20Shot%202021-02-08%20at%2011.41.16%20PM.png)
 
 ### Query Bridges
-![](Screen%20Shot%202021-02-08%20at%2011.42.19%20PM.png)
+![search for bridges](./braidge_search_demo.gif)
 * Can query bridges in California by counties
 
 ### Bridge Info
-![](Screen%20Shot%202021-02-08%20at%2011.42.42%20PM.png)
+![bridge info](./braidge_info_demo)
 * In-depth details of any bridge in California
 
 ### Bridge Condition Scoresheet
